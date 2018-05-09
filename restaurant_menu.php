@@ -41,7 +41,15 @@ class RestaurantMenu {
 
 	public function publicHooks() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueScripts' ) );
+		add_action('admin_enqueue_scripts', array($this,'admin_enqueue_css'));
 	}
+
+	public function admin_enqueue_css() 
+	{
+		wp_enqueue_style( 'rl_res_admin_style', RESTAURANT_MENU_PLUGIN_URL . 'assets/admin.css' );
+	}
+
+
 
 	/**
 	 * The hook where we will register all the common actions and filters
@@ -64,24 +72,20 @@ class RestaurantMenu {
 
 	public function enqueueScripts() {
 		wp_enqueue_style( 'rl_res_style-res-menu', RESTAURANT_MENU_PLUGIN_URL . 'assets/style.css' );
-		wp_enqueue_style( 'rl_res_font-awesome-style',
-			'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
+		wp_enqueue_style( 'rl_res_font-awesome-style','https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
 		wp_enqueue_script( 'rl_res_vertical_tabbed', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/vertical_tabbed.js', array( 'jquery' ) );
 		wp_enqueue_script( 'rl_res_tab_style_menu', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/tab_style_menu.js', array( 'jquery' ) );
 		wp_enqueue_script( 'rl_res_categorized_menu', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/categorized_menu.js', array( 'jquery' ) );
 		wp_enqueue_script( 'rl_res_boxed_style_menu', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/boxed_style_menu.js', array( 'jquery' ) );
 
-		wp_enqueue_script( 'rl_res_modal_custom_ajax', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/modal_custom_ajax.js',
-			array( 'jquery' ) );
+		wp_enqueue_script( 'rl_res_modal_custom_ajax', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/modal_custom_ajax.js',array( 'jquery' ) );
 
-		wp_localize_script( 'rl_res_modal_custom_ajax', 'res_menu',
-			array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'rl_res_modal_custom_ajax', 'res_menu',array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
-		wp_enqueue_script( 'rl_res_jquery-ui', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
-			array( 'jquery' ) );
+		wp_enqueue_script( 'rl_res_jquery-ui', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',array( 'jquery' ) );
 
-		wp_enqueue_script( 'rl_res_sleep_custom_link', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/sleep.php' );
-		wp_localize_script( 'rl_res_sleep_custom_link', 'sleep', array( 'url' => RESTAURANT_MENU_PLUGIN_URL . 'assets/js/sleep.php' ) );
+		wp_enqueue_script( 'rl_res_sleep_custom_link', RESTAURANT_MENU_PLUGIN_URL . 'sleep.php' );
+		wp_localize_script( 'rl_res_sleep_custom_link', 'sleep', array( 'url' => RESTAURANT_MENU_PLUGIN_URL . 'sleep.php' ) );
 	}
 
 	public function modalGenerate() {

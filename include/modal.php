@@ -1,11 +1,27 @@
+<?php
+
+$price         = get_post_meta($PostID, 'rl_price', true);
+$calories      = get_post_meta($PostID, 'rl_calories', true);
+$fiber         = get_post_meta($PostID, 'rl_fiber', true);
+$carbohydrates = get_post_meta($PostID, 'rl_carbohydrates', true);
+$protein       = get_post_meta($PostID, 'rl_protein', true);
+$cholesterol   = get_post_meta($PostID, 'rl_cholesterol', true);
+$sodium        = get_post_meta($PostID, 'rl_sodium', true);
+$fat           = get_post_meta($PostID, 'rl_fat', true);
+$ingredients   = get_post_meta($PostID, 'rl_ingredients', true);
+
+?>
+
+
+
 <div id="<?php echo $PostID; ?>" class="modalDialog">
     <div class="modal_item">
         <a title="Close" class="cls close">X</a>
         <div class="root_image">
 			<?php the_post_thumbnail(); ?>
             <span class="centered"><?php the_title(); ?></span>
-			<?php if ( rwmb_meta( 'rlgroup_price_id' ) ): ?>
-                <span class="centered_price"><?php echo rwmb_meta( 'rlgroup_price_id' ); ?></span>
+			<?php if ( $price ): ?>
+                <span class="centered_price"><?php echo $price;  ?></span>
 			<?php endif; ?>
 
         </div>
@@ -20,17 +36,9 @@
               ?>
             </span>
             <h3 class="root_title"><?php the_title(); ?></h3>
-			<?php echo rwmb_meta( 'rlgroup_desc_id' ); ?>
+			<?php the_content(); ?>
         </div>
-		<?php
-		$calories      = rwmb_meta( 'rlgroup_calories' );
-		$fiber         = rwmb_meta( 'rlgroup_fiber' );
-		$carbohydrates = rwmb_meta( 'rlgroup_carbohydrates' );
-		$protein       = rwmb_meta( 'rlgroup_protein' );
-		$cholesterol   = rwmb_meta( 'rlgroup_cholesterol' );
-		$sodium        = rwmb_meta( 'rlgroup_sodium' );
-		$fat           = rwmb_meta( 'rlgroup_fat' );
-		?>
+		
 
 		<?php if ( $calories || $fiber || $carbohydrates || $protein || $cholesterol || $sodium || $fat ) : ?>
             <div class="res_hr"></div>
@@ -58,7 +66,7 @@
 		<?php endif; ?>
 
 
-		<?php if ( rwmb_meta( 'rlgroup_ingredients' ) ): ?>
+		<?php if ( $ingredients ): ?>
             <div class="res_hr"></div>
             <div class="ingredients">
                   <span class="rl_menu_icon">
@@ -68,7 +76,7 @@
                     <h4 class="rl_popup_option_title">Ingredients</h4>
                     <div class="clear"></div>
                     <div class="rl_text ffgeo">
-						<?php echo rwmb_meta( 'rlgroup_ingredients' ); ?>
+						<?php echo wp_strip_all_tags( $ingredients ); ?>
                     </div>
                     <div class="clear"></div>
                 </div>

@@ -9,7 +9,7 @@
                         </div>
                         <div class="res-col-8">
                             <div class="res-meal-content">
-                                <span class="price"> <?php echo rwmb_meta( 'rlgroup_price_id', array(), $item->ID ); ?></span>
+                                <span class="price"> <?php echo get_post_meta($item->ID, 'rl_price', true);  ?></span>
                                 <h4 class="title"><?php echo $item->post_title; ?></h4>
                                 <div class="content-child">
 									<?php echo $item->post_content; ?>
