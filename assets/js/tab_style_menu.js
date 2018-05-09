@@ -4,9 +4,8 @@ jQuery(document).ready(function () {
 	jQuery(document).on("click", ".toggle", function(e)
 	{
 		e.preventDefault();
-
-		var val = jQuery(this).attr('data-attr-toggle');
-		console.log(val);
+    var val = jQuery(this).attr('data-attr-toggle');
+		
 	    jQuery("#"+val).slideToggle(200);
 	    return false;
 	}); 
@@ -23,7 +22,7 @@ jQuery(document).ready(function () {
           
           jQuery('.tab_container').hide();
           jQuery('#'+ t + 'C').fadeIn('slow');
-          console.log(t + 'C');
+          
       }
   });
 })

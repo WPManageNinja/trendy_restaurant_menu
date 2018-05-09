@@ -1,0 +1,39 @@
+.rl_meta_label {
+	width: 25%;
+	float: left;
+}
+
+.rl_meta_label {
+	font-weight: 600;
+}
+
+.rl_root_meta_field:not(:last-of-type) {
+    margin: 0 0 12px;
+}
+
+#rl_res_ingredients_meta_id {
+	height: 550px;
+}
+
+.rl_meta_field_ing {
+	width: 75%;
+	float: left;
+}
+
+@media(max-width: 799px) {
+	#rl_res_ingredients_meta_id {
+		height: 600px;
+	}	
+}
+
+@media(max-width: 466px) {
+	#rl_res_ingredients_meta_id {
+		height: 650px;
+	}	
+}
+
+@media(max-width: 396px) {
+	#rl_res_ingredients_meta_id {
+		height: 700px;
+	}	
+}

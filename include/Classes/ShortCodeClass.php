@@ -1,4 +1,6 @@
-<?php namespace RestaurantMenu\Classes;
+<?php 
+
+namespace RestaurantMenu\Classes;
 
 class ShortCodeClass {
 	public function register( $atts ) {
@@ -8,7 +10,8 @@ class ShortCodeClass {
 			'meal_type' => false,
 			'dish_type' => false,
 			'location'  => false,
-			'relation' => 'OR'
+			'type'  	=> false,
+			'relation'  => 'OR'
 		), $atts ) );
 
 		$taxonomies = array(
@@ -16,7 +19,14 @@ class ShortCodeClass {
 			'rl_res_dish_cat'     => ( $dish_type ) ? explode( ',', $dish_type ) : array(),
 			'rl_res_location_cat' => ( $location ) ? explode( ',', $location ) : array()
 		);
-		$menuItems = $this->getMenuItems( $taxonomies, $limit, $relation );
+		
+
+		$types = array(
+			'taxonomy'  => ( $type ) ? explode( ',', $type ) : array(),
+		);
+		
+		
+		$menuItems = $this->getMenuItems( $taxonomies, $limit, $relation, $types );
 		
 		return $this->makeView($display, array(
 			'items' => $menuItems
@@ -24,7 +34,7 @@ class ShortCodeClass {
 		
 	}
 
-	public function getMenuItems( $taxonomies, $limit = - 1, $tax_relation = 'AND' ) {
+	public function getMenuItems( $taxonomies, $limit = - 1, $tax_relation = 'AND', $types ) {
 		$taxQuery = array(
 			'relation' => $tax_relation,
 		);
@@ -37,6 +47,23 @@ class ShortCodeClass {
 				);
 			}
 		}
+
+		
+		foreach ($types as $type) {
+			$type_items = get_terms($type);
+			foreach ($type_items as $type_item) {
+				if($type_item->taxonomy) {
+					$taxQuery[] = array(
+						'taxonomy' => $type_item->taxonomy,
+						'field'    => 'slug',
+						'terms'    => $type_item->slug,
+						'include_children' => false,
+					);
+				}
+			}
+		}
+
+
 		$queryArgs = array(
 			'posts_per_page' => $limit,
 			'post_type' => 'rl_res_menu',
@@ -60,3 +87,6 @@ class ShortCodeClass {
 		return ob_get_clean();
 	}
 }
+
+
+

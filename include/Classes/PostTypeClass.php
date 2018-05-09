@@ -1,4 +1,6 @@
-<?php namespace RestaurantMenu\Classes;
+<?php 
+
+namespace RestaurantMenu\Classes;
 
 class PostTypeClass {
 	

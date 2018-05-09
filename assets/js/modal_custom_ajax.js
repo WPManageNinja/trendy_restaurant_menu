@@ -13,15 +13,9 @@ var resMenuModal = {
 	        beforeSend: function() {
 	            jQuery('body').append(res.loader);
 	            jQuery('body').css('overflow','hidden');
-	            console.log("BeforeSend is activated");
-
-
 	        },
 	        success: function() {
-	           
-	            console.log(resmenu_Id);
-				
-				jQuery.post(res_menu.ajaxurl, { action: 'res_menu_modal', id :  resmenu_Id }, function(response){
+	          	jQuery.post(res_menu.ajaxurl, { action: 'res_menu_modal', id :  resmenu_Id }, function(response){
 					var resModalHolder = jQuery('<div/>', {
 						class: 'res-modal-holder',
 						html:response
@@ -34,7 +28,7 @@ var resMenuModal = {
 
 				});
 				jQuery('body').css('overflow', 'hidden');
-				console.log("Success is Activated");
+				
 	        }
     	})
 
