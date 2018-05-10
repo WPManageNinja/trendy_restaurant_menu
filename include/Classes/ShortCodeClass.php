@@ -10,7 +10,6 @@ class ShortCodeClass {
 			'meal_type' => false,
 			'dish_type' => false,
 			'location'  => false,
-			'type'  	=> false,
 			'relation'  => 'OR'
 		), $atts ) );
 
@@ -20,21 +19,16 @@ class ShortCodeClass {
 			'rl_res_location_cat' => ( $location ) ? explode( ',', $location ) : array()
 		);
 		
-
-		$types = array(
-			'taxonomy'  => ( $type ) ? explode( ',', $type ) : array(),
-		);
 		
-		
-		$menuItems = $this->getMenuItems( $taxonomies, $limit, $relation, $types );
+		$menuItems = $this->getMenuItems( $taxonomies, $limit, $relation );
 		
 		return $this->makeView($display, array(
-			'items' => $menuItems
+			'items' => $menuItems,
+			'currency' => '$'
 		));
-		
 	}
 
-	public function getMenuItems( $taxonomies, $limit = - 1, $tax_relation = 'AND', $types ) {
+	public function getMenuItems( $taxonomies, $limit = - 1, $tax_relation = 'AND' ) {
 		$taxQuery = array(
 			'relation' => $tax_relation,
 		);
@@ -47,32 +41,22 @@ class ShortCodeClass {
 				);
 			}
 		}
-
 		
-		foreach ($types as $type) {
-			$type_items = get_terms($type);
-			foreach ($type_items as $type_item) {
-				if($type_item->taxonomy) {
-					$taxQuery[] = array(
-						'taxonomy' => $type_item->taxonomy,
-						'field'    => 'slug',
-						'terms'    => $type_item->slug,
-						'include_children' => false,
-					);
-				}
-			}
-		}
-
-
 		$queryArgs = array(
 			'posts_per_page' => $limit,
-			'post_type' => 'rl_res_menu',
+			'post_type' => 'restaurant_menu',
 		);
 		
 		if(count($taxQuery) > 1) {
 			$queryArgs['tax_query'] = $taxQuery;
 		}
-		return get_posts($queryArgs);
+		$items =  get_posts($queryArgs);
+		
+		foreach ($items as $item) {
+			$item->price = number_format(get_post_meta($item->ID, '_ninja_restaurant_item_price', true));
+		}
+		
+		return $items;
 	}
 	
 	private function makeView($templateName, $data = array()) {

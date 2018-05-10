@@ -6,7 +6,7 @@ Description: Restaurant Menu for a Restaurant business..
 Version:     0.1
 Author:      WPManageNinja
 Author URI:  https://wpmanageninja.com
-Text Domain: restaurant menu
+Text Domain: restaurant_menu
 Domain Path: /languages
 License:     GPL2
  
@@ -29,7 +29,6 @@ defined( 'ABSPATH' ) or die();
 define( 'RESTAURANT_MENU_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'RESTAURANT_MENU_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
-
 include 'load.php';
 
 class RestaurantMenu {
@@ -37,20 +36,15 @@ class RestaurantMenu {
 	public function boot() {
 		$this->publicHooks();
 		$this->commonHooks();
+		if(is_admin()) {
+			$this->adminHooks();
+		}
 	}
 
 	public function publicHooks() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueScripts' ) );
-		add_action('admin_enqueue_scripts', array($this,'admin_enqueue_css'));
 	}
-
-	public function admin_enqueue_css() 
-	{
-		wp_enqueue_style( 'rl_res_admin_style', RESTAURANT_MENU_PLUGIN_URL . 'assets/admin.css' );
-	}
-
-
-
+	
 	/**
 	 * The hook where we will register all the common actions and filters
 	 */
@@ -61,13 +55,18 @@ class RestaurantMenu {
 
 		$shortCodeClass = new \RestaurantMenu\Classes\ShortCodeClass();
 		add_shortcode( 'restaurant_menu', array( $shortCodeClass, 'register' ) );
-
+		
+		$menuContentClass = new \RestaurantMenu\Classes\MenuContentClass();
+		add_action('wp_ajax_restaurant_menu_public_ajax_actions', array($menuContentClass, 'handleAjax'));
+		add_action('wp_ajax_nopriv_restaurant_menu_public_ajax_actions', array($menuContentClass, 'handleAjax'));
+		
 		add_action( 'wp_ajax_res_menu_modal', array( $this, 'modalGenerate' ) );
 		add_action( 'wp_ajax_nopriv_res_menu_modal', array( $this, 'modalGenerate' ) );
 	}
 
 	public function adminHooks() {
-
+		add_action('add_meta_boxes_restaurant_menu', array('\RestaurantMenu\Classes\MetaBoxClass', 'addMetaBoxes'));
+		add_action('save_post_restaurant_menu',  array('\RestaurantMenu\Classes\MetaBoxClass', 'saveMeta'));
 	}
 
 	public function enqueueScripts() {
@@ -78,7 +77,7 @@ class RestaurantMenu {
 		wp_enqueue_script( 'rl_res_categorized_menu', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/categorized_menu.js', array( 'jquery' ) );
 		wp_enqueue_script( 'rl_res_boxed_style_menu', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/boxed_style_menu.js', array( 'jquery' ) );
 
-		wp_enqueue_script( 'rl_res_modal_custom_ajax', RESTAURANT_MENU_PLUGIN_URL . 'assets/js/modal_custom_ajax.js',array( 'jquery' ) );
+		wp_enqueue_script( 'rl_res_modal_custom_ajax', RESTAURANT_MENU_PLUGIN_URL . 'assets/app.js',array( 'jquery' ) );
 
 		wp_localize_script( 'rl_res_modal_custom_ajax', 'res_menu',array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
@@ -102,15 +101,10 @@ class RestaurantMenu {
 		echo ob_get_clean();
 		die();
 	}
-
+	
 }
 
 add_action( 'plugins_loaded', function () {
 	$RestaurantMenus = new RestaurantMenu();
 	$RestaurantMenus->boot();
 } );
-
-
-if ( file_exists( dirname( __FILE__ ) . '/include/restaurant-menu-settings.php' ) ) {
-	require dirname( __FILE__ ) . '/include/restaurant-menu-settings.php';
-};

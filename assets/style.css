@@ -579,7 +579,7 @@
 .categorized_menu_container .foodpress_menu h2 {
     color: #7a2662;
     cursor: pointer;
-    font-weight: 150;
+    font-weight: 300;
     margin-top: -6px;
 }
 
@@ -598,7 +598,7 @@
 }
 
 #b_crepes {
-    font-weight: 150;
+    font-weight: 300;
     color: #7a2662;
     cursor: pointer;
     margin: 0;
@@ -908,7 +908,7 @@ border: solid transparent;
  .boxed-style-wrapper .f_img h4 {
     text-align: center;
     font-size: 25px;
-    font-weight: 220;
+    font-weight: 300;
     color: #fff;
 } 
 
@@ -929,7 +929,7 @@ border: solid transparent;
  .boxed-style-wrapper .s_img h4 {
     text-align: center;
     font-size: 25px;
-    font-weight: 220;
+    font-weight: 300;
     color: #fff;
 }
 
@@ -956,7 +956,7 @@ border: solid transparent;
 .boxed-style-wrapper .n_img h4 {
     text-align: center;
     font-size: 25px;
-    font-weight: 220;
+    font-weight: 300;
     color: #fff;
     padding-top: 75px;
 }

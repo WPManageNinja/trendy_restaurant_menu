@@ -49,7 +49,7 @@ var resMenuModal = {
 		});
 
 	}
-}
+};
 
 resMenuModal.init();
 

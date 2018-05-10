@@ -37,3 +37,9 @@
 		height: 700px;
 	}	
 }
+
+.ninja_restaurant_meta_box {
+	overflow: hidden;
+	width: 100%;
+	display: block;
+}

@@ -4,7 +4,7 @@ namespace RestaurantMenu\Classes;
 
 class PostTypeClass {
 	
-	private $postTypeName = 'rl_res_menu';
+	private $postTypeName = 'restaurant_menu';
 	
 	public function initRestaurantPostType()
 	{
