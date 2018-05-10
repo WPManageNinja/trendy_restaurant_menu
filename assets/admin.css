@@ -20,6 +20,14 @@
 	float: left;
 }
 
+
+.ninja_restaurant_meta_box {
+	overflow: hidden;
+	width: 100%;
+	display: block;
+}
+
+
 @media(max-width: 799px) {
 	#rl_res_ingredients_meta_id {
 		height: 600px;
@@ -38,8 +46,3 @@
 	}	
 }
 
-.ninja_restaurant_meta_box {
-	overflow: hidden;
-	width: 100%;
-	display: block;
-}

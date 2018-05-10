@@ -7,7 +7,9 @@
 			<div class="res-container featured_style_c" data-res_menu_id="<?php echo $item->ID; ?>" >
 		        <div class="featured_image">
 		            <?php echo get_the_post_thumbnail($item)  ?>
-		            <span class="price"><?php echo get_post_meta($item->ID, 'rl_price', true);  ?></span>                
+		            <?php if($item->price):?>
+		            	<span class="price"><?php echo $currency.$item->price; ?></span>
+		            <?php endif; ?>                
 		        </div>
 		        <div class="menu_info_box">
 		            <div class="menu_info">
@@ -24,7 +26,9 @@
 			        <?php echo get_the_post_thumbnail($item); ?>
 			    </div>
 			    <div class="menu_info">
-			        <span class="price"><?php echo get_post_meta($item->ID, 'rl_price', true);  ?></span> 
+			         <?php if($item->price):?>
+			         	<span class="price"><?php echo $currency.$item->price; ?></span> 
+			         <?php endif; ?>
 			        <h3 class="title"><?php echo $item->post_title; ?></h3>  
 			        <div class="menu_description">
 			           <?php echo $item->post_content; ?>

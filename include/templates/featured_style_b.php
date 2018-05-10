@@ -11,7 +11,9 @@
                                 <?php echo get_the_post_thumbnail($item); ?>
                             </div>
                             <div class="feat_style_b_info">
-                                <span class="price"><?php echo get_post_meta($item->ID, 'rl_price', true);  ?></span>  
+                                <?php if($item->price):?>
+                                  <span class="price"><?php echo $currency.$item->price; ?></span>  
+                                <?php endif; ?>
                                   <h3 class="title"><?php echo $item->post_title; ?></h3>
                                   <a> Read More </a> 
                             </div>
@@ -23,7 +25,9 @@
                                   <?php echo get_the_post_thumbnail($item);  ?>
                             </div>
                             <div class="more_infor">
-                                <span class="price"><?php echo get_post_meta($item->ID, 'rl_price', true);  ?></span>
+                                <?php if($item->price):?>
+                                  <span class="price"><?php echo $currency.$item->price; ?></span>
+                                <?php endif;?>
                                 <h4 class="title"><?php echo $item->post_title; ?></h4>
                                  <div class="menu_description">
                                     <?php echo $item->post_content; ?>

@@ -84,7 +84,15 @@ var restaurantMenuApp = {
             route: 'get_item',
             item_id: itemId
         }).then(function (response) {
-            console.log(response);
+            var resModalHolder = jQuery('<div/>', {
+                class: 'res-modal-holder',
+                html:response.data.content
+            });
+            jQuery('body')
+                .hide()
+                .append(resModalHolder)
+                .fadeIn(300)
+            // console.log(response.data.content);
         }).fail(function (error) {
             console.log(error);
         }).always(function () {});
@@ -93,19 +101,37 @@ var restaurantMenuApp = {
         var that = this;
         jQuery('.res-container').on('click', function (event) {
             event.preventDefault();
+            jQuery('body').css('overflow','hidden');
             var itemId = jQuery(this).attr('data-res_menu_id');
             if (itemId) {
                 that.fetchItem(itemId);
             }
         });
     },
+
+    removeModalClick: function() {
+        jQuery(document).on("click", '.cls', function() {
+            jQuery('.res-modal-holder')
+                    .fadeOut('300', function() {
+                        jQuery(this).remove();
+                    });
+            jQuery('body').css('overflow', 'scroll');
+        });
+    },
+
     documentReady: function documentReady() {
         var _this = this;
 
         jQuery(document).ready(function () {
             _this.initModalClick();
+            _this.removeModalClick();
         });
     }
+
+
+
+
+
 };
 
 restaurantMenuApp.documentReady();
