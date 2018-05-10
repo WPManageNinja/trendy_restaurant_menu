@@ -101,7 +101,8 @@ class RestaurantMenu {
 		echo ob_get_clean();
 		die();
 	}
-	
+
+
 }
 
 add_action( 'plugins_loaded', function () {

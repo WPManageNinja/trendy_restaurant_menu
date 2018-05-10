@@ -1442,7 +1442,9 @@ display: block;
     position: fixed;
 }
 
-
+.nutrition_info li {
+    list-style: none;
+}
 
 
 /* loader.gif */
