@@ -76,8 +76,21 @@ module.exports = __webpack_require__(2);
 /***/ (function(module, exports) {
 
 var restaurantMenuApp = {
-    setModal: function setModal() {},
+    addLoader: function addLoader() {
+        var res = {
+            loader: jQuery('<div/>', {
+                class: 'loader'
+            })
+        };
+        jQuery('body').append(res.loader);
+    },
+    removeLoader: function removeLoader() {
+        jQuery('body').find(".loader").remove();
+    },
     fetchItem: function fetchItem(itemId) {
+        var _this = this;
+
+        this.addLoader();
 
         jQuery.get(res_menu.ajaxurl, {
             action: 'restaurant_menu_public_ajax_actions',
@@ -86,52 +99,40 @@ var restaurantMenuApp = {
         }).then(function (response) {
             var resModalHolder = jQuery('<div/>', {
                 class: 'res-modal-holder',
-                html:response.data.content
+                html: response.data.content
             });
-            jQuery('body')
-                .hide()
-                .append(resModalHolder)
-                .fadeIn(300)
+            jQuery('body').hide().append(resModalHolder).fadeIn(300);
             // console.log(response.data.content);
         }).fail(function (error) {
             console.log(error);
-        }).always(function () {});
+        }).always(function () {
+            _this.removeLoader();
+        });
     },
     initModalClick: function initModalClick() {
         var that = this;
         jQuery('.res-container').on('click', function (event) {
             event.preventDefault();
-            jQuery('body').css('overflow','hidden');
             var itemId = jQuery(this).attr('data-res_menu_id');
             if (itemId) {
                 that.fetchItem(itemId);
             }
         });
-    },
 
-    removeModalClick: function() {
-        jQuery(document).on("click", '.cls', function() {
-            jQuery('.res-modal-holder')
-                    .fadeOut('300', function() {
-                        jQuery(this).remove();
-                    });
+        jQuery(document).on("click", '.cls', function () {
+            jQuery('.res-modal-holder').fadeOut('300', function () {
+                jQuery(this).remove();
+            });
             jQuery('body').css('overflow', 'scroll');
         });
     },
-
     documentReady: function documentReady() {
-        var _this = this;
+        var _this2 = this;
 
         jQuery(document).ready(function () {
-            _this.initModalClick();
-            _this.removeModalClick();
+            _this2.initModalClick();
         });
     }
-
-
-
-
-
 };
 
 restaurantMenuApp.documentReady();
