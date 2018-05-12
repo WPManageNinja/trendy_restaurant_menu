@@ -1369,11 +1369,17 @@ display: block;
 }
 .root_image img {
     opacity: 0.5;
+    transition: 0.3s ease-in;
 }
 
-.root_image img:hover {
+.root_image:hover img {
     opacity: 1;
-    transition: 0.3s ease-in;
+}
+.root_image span{
+    opacity: 1;
+}
+.root_image:hover span{
+    opacity: .8;
 }
 
 
