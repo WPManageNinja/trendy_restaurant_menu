@@ -46,7 +46,7 @@ class PostTypeClass {
 			'hierarchical'       => false,
 			'menu_position'      => 21,
 			'menu_icon'          => 'dashicons-welcome-widgets-menus',
-			'supports'           => array( 'title', 'thumbnail', 'editor' )
+			'supports'           => array( 'title', 'thumbnail', 'editor', 'excerpt' )
 		);
 		register_post_type( $this->postTypeName, $args );
 	}

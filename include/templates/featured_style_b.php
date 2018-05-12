@@ -1,46 +1,46 @@
 <div class="feat_style_b_container">
     <div class="res_row">
-         <div class="feat_style_b_col_8">
+        <div class="feat_style_b_col_8">
             <div class="res_row">
-                  <?php $res_count = 0; ?>
-                 <?php foreach ($items as $item ) : ?>
-                    <?php if( $res_count == 0 ) : ?>
-
-                       <div class="feat_style_b_col_12 res-container" data-res_menu_id="<?php echo $item->ID; ?>">
+				<?php foreach ( $items as $index => $item ) : ?>
+					<?php setup_postdata( $item ); ?>
+					<?php if ( $disable_modal ) {
+						$modalClass = '';
+					} else {
+						$modalClass = 'res_item_modal';
+					}
+					?>
+					<?php if ( $index == 0 ) : ?>
+                        <div class="feat_style_b_col_12 res-container <?php echo $modalClass; ?>" data-res_menu_id="<?php echo $item->ID; ?>">
                             <div class="feat_big_image">
-                                <?php echo get_the_post_thumbnail($item); ?>
+								<?php the_post_thumbnail( 'large' ); ?>
                             </div>
                             <div class="feat_style_b_info">
-                                <?php if($item->price):?>
-                                  <span class="price"><?php echo $currency.$item->price; ?></span>  
-                                <?php endif; ?>
-                                  <h3 class="title"><?php echo $item->post_title; ?></h3>
-                                  <a> Read More </a> 
+								<?php if ( $item->price ): ?>
+                                    <span class="price"><?php echo $currency . $item->price; ?></span>
+								<?php endif; ?>
+                                <h3 class="title"><?php the_title(); ?></h3>
                             </div>
                         </div>
-
-                    <?php else: ?>
-                        <div class="feat_style_b_col_4 res-container" data-res_menu_id="<?php echo $item->ID; ?>">
+					<?php else: ?>
+                        <div class="feat_style_b_col_4 res-container <?php echo $modalClass; ?>" data-res_menu_id="<?php echo $item->ID; ?>">
                             <div class="feat_sm_image">
-                                  <?php echo get_the_post_thumbnail($item);  ?>
+								<?php the_post_thumbnail( 'medium' ); ?>
                             </div>
                             <div class="more_infor">
-                                <?php if($item->price):?>
-                                  <span class="price"><?php echo $currency.$item->price; ?></span>
-                                <?php endif;?>
-                                <h4 class="title"><?php echo $item->post_title; ?></h4>
-                                 <div class="menu_description">
-                                    <?php echo $item->post_content; ?>
-                                 </div>
+								<?php if ( $item->price ): ?>
+                                    <span class="price"><?php echo $currency . $item->price; ?></span>
+								<?php endif; ?>
+                                <h4 class="title"><?php the_title(); ?></h4>
+                                <div class="menu_description">
+									<?php the_excerpt(); ?>
+                                </div>
                             </div>
-                       </div> 
-                    <?php 
-                      endif; 
-                      $res_count++ ; 
-                      endforeach; 
-                   ?>
-
-              </div>
+                        </div>
+					<?php endif; ?>
+					<?php wp_reset_postdata(); ?>
+				<?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div>

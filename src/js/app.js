@@ -1,11 +1,11 @@
 const restaurantMenuApp = {
     
     addLoader() {
-        var res = {
+        let res = {
             loader: jQuery('<div/>', {
                 class: 'loader'
             })
-        }
+        };
         jQuery('body').append(res.loader);
     },
 
@@ -42,14 +42,13 @@ const restaurantMenuApp = {
 
     initModalClick() {
         var that = this;
-        jQuery('.res-container').on('click', function (event) {
+        jQuery('.res_item_modal').on('click', function (event) {
             event.preventDefault();
             let itemId = jQuery(this).attr('data-res_menu_id');
             if (itemId) {
                 that.fetchItem(itemId);
             }
         });
-
         jQuery(document).on("click", '.cls', function() {
             jQuery('.res-modal-holder')
                     .fadeOut('300', function() {
