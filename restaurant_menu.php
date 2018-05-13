@@ -62,12 +62,20 @@ class RestaurantMenu {
 		
 		add_action( 'wp_ajax_res_menu_modal', array( $this, 'modalGenerate' ) );
 		add_action( 'wp_ajax_nopriv_res_menu_modal', array( $this, 'modalGenerate' ) );
+
 	}
+
 
 	public function adminHooks() {
 		add_action('add_meta_boxes_restaurant_menu', array('\RestaurantMenu\Classes\MetaBoxClass', 'addMetaBoxes'));
 		add_action('save_post_restaurant_menu',  array('\RestaurantMenu\Classes\MetaBoxClass', 'saveMeta'));
+		add_action('widgets_init', array($this, 'rlResMenuWidget') );
 	}
+
+	public function rlResMenuWidget(){
+		$ResMenuWidgetClass = new \RestaurantMenu\Classes\ResMenuWidgetClass();
+		register_widget($ResMenuWidgetClass);
+	} 
 
 	public function enqueueScripts() {
 		wp_enqueue_style( 'rl_res_style-res-menu', RESTAURANT_MENU_PLUGIN_URL . 'assets/style.css' );
@@ -109,3 +117,7 @@ add_action( 'plugins_loaded', function () {
 	$RestaurantMenus = new RestaurantMenu();
 	$RestaurantMenus->boot();
 } );
+
+		
+
+
