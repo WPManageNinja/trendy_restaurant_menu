@@ -19,7 +19,7 @@
 								<?php if ( $item->price ): ?>
                                     <span class="price"><?php echo $currency . $item->price; ?></span>
 								<?php endif; ?>
-                                <h3 class="title"><?php the_title(); ?></h3>
+                                <h3 class="title"><?php echo get_the_title($item); ?></h3>
                             </div>
                         </div>
 					<?php else: ?>
@@ -31,7 +31,7 @@
 								<?php if ( $item->price ): ?>
                                     <span class="price"><?php echo $currency . $item->price; ?></span>
 								<?php endif; ?>
-                                <h4 class="title"><?php the_title(); ?></h4>
+                                <h4 class="title"><?php echo get_the_title($item); ?></h4>
                                 <div class="menu_description">
 									<?php the_excerpt(); ?>
                                 </div>

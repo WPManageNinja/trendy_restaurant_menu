@@ -111,14 +111,13 @@ var restaurantMenuApp = {
     },
     initModalClick: function initModalClick() {
         var that = this;
-        jQuery('.res-container').on('click', function (event) {
+        jQuery('.res_item_modal').on('click', function (event) {
             event.preventDefault();
             var itemId = jQuery(this).attr('data-res_menu_id');
             if (itemId) {
                 that.fetchItem(itemId);
             }
         });
-
         jQuery(document).on("click", '.cls', function () {
             jQuery('.res-modal-holder').fadeOut('300', function () {
                 jQuery(this).remove();
