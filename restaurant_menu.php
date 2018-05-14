@@ -55,14 +55,12 @@ class RestaurantMenu {
 
 		$shortCodeClass = new \RestaurantMenu\Classes\ShortCodeClass();
 		add_shortcode( 'restaurant_menu', array( $shortCodeClass, 'register' ) );
-
+		
 		$menuContentClass = new \RestaurantMenu\Classes\MenuContentClass();
 		add_action( 'wp_ajax_restaurant_menu_public_ajax_actions', array( $menuContentClass, 'handleAjax' ) );
 		add_action( 'wp_ajax_nopriv_restaurant_menu_public_ajax_actions', array( $menuContentClass, 'handleAjax' ) );
-
-		add_action( 'wp_ajax_res_menu_modal', array( $this, 'modalGenerate' ) );
-		add_action( 'wp_ajax_nopriv_res_menu_modal', array( $this, 'modalGenerate' ) );
-
+	
+		add_filter('the_content', array($menuContentClass, 'filterSingleMenuContent'));
 	}
 
 
@@ -79,29 +77,14 @@ class RestaurantMenu {
 
 	public function enqueueScripts() {
 		wp_enqueue_style( 'ninja_restaurant_styles', RESTAURANT_MENU_PLUGIN_URL . 'assets/styles.css' );
-		
 		wp_enqueue_script( 'ninja_restaurant_js', RESTAURANT_MENU_PLUGIN_URL . 'assets/app.js',
 			array( 'jquery' ) );
-
 		wp_localize_script( 'ninja_restaurant_js', 'res_menu',
-			array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+			array(
+				'ajaxurl' => admin_url( 'admin-ajax.php' )
+			)
+		);
 	}
-
-	public function modalGenerate() {
-		$PostID   = $_POST['id'];
-		$resMenus = new WP_Query( array(
-			'post_type' => 'rl_res_menu',
-			'p'         => $PostID,
-		) );
-
-		ob_start();
-		while ( $resMenus->have_posts() ) : $resMenus->the_post();
-			require( dirname( __FILE__ ) . '/include/modal.php' );
-		endwhile;
-		echo ob_get_clean();
-		die();
-	}
-
 
 }
 

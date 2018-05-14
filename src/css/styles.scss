@@ -20,15 +20,16 @@
       padding: 0px;
       margin: 0px;
     }
-    .res_item_price {
-      padding: 5px 10px;
-      display: inline-block;
-      font-size: 12px;
-      background-color: #955181;
-      border-radius: 5px;
-      color: white;
-    }
   }
+}
+
+.res_item_price {
+  padding: 5px 10px;
+  display: inline-block;
+  font-size: 12px;
+  background-color: #955181;
+  border-radius: 5px;
+  color: white;
 }
 
 // explicit styles for default
@@ -104,12 +105,18 @@
   }
   .res-item {
     .res_featured_image {
+      position: relative;
       width: 100%;
       padding: 0px;
       margin: 0px;
       float: none;
       img {
         max-width: 100%;
+      }
+      .res_item_price {
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
       }
     }
     .res-item-content {
@@ -119,8 +126,16 @@
   }
 }
 
+.res_single_item_content {
+  .rl_inner {
+    h4 {
+      padding: 0px;
+      margin: 10px 0;
+    }
+  }
+}
+
 // modal css
 
 
 // loading css
-

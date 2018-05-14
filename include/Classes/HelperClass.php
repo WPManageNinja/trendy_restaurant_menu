@@ -62,7 +62,7 @@ class HelperClass {
 	}
 	
 	public static function formatPrice($price) {
-		if(!$price) {
+		if(!$price || !is_numeric($price)) {
 			return false;
 		}
 		return number_format($price);

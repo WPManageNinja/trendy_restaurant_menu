@@ -29,7 +29,7 @@
   margin: 0px;
 }
 
-.ninja_res_menu_group .res-item .res_item_price {
+.res_item_price {
   padding: 5px 10px;
   display: inline-block;
   font-size: 12px;
@@ -112,6 +112,7 @@
 }
 
 .ninja_res_menu_group.ninja_res_menu_grid .res-item .res_featured_image {
+  position: relative;
   width: 100%;
   padding: 0px;
   margin: 0px;
@@ -122,8 +123,19 @@
   max-width: 100%;
 }
 
+.ninja_res_menu_group.ninja_res_menu_grid .res-item .res_featured_image .res_item_price {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+}
+
 .ninja_res_menu_group.ninja_res_menu_grid .res-item .res-item-content {
   padding-left: 0px;
   width: 100%;
+}
+
+.res_single_item_content .rl_inner h4 {
+  padding: 0px;
+  margin: 10px 0;
 }
 
