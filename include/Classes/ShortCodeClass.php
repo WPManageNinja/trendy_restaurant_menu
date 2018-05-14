@@ -14,7 +14,7 @@ class ShortCodeClass {
 			'location'  => false,
 			'disable_modal' => false,
 			'relation'  => 'OR',
-			'per_grid' => 3
+			'per_grid' => 2
 		));
 		
 		$attributes = shortcode_atts( $defaults, $atts );
@@ -25,7 +25,6 @@ class ShortCodeClass {
 	}
 	
 	private function getViewNameByDisplay($display) {
-		echo $display.'<br />';
 		$displayArray = array(
 			'simple' => 'simple_food_menu',
 			'center_aligned' => 'center_aligned_menu',
