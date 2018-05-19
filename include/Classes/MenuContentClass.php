@@ -17,7 +17,7 @@ class MenuContentClass {
 	}
 
 	public function getItemModal() {
-		sleep( 3 );
+		sleep( 1 );
 
 		$postId = intval( $_REQUEST['item_id'] );
 		$post   = get_post( $postId );

@@ -12,9 +12,11 @@
       <span class="des_icon">
         <?php
         $categories = get_the_terms( $postID, 'rl_res_meal_cat' );
-        foreach ( $categories as $category ):
-        echo $category->name;
-        endforeach;
+        if($categories) {
+	        foreach ( $categories as $category ):
+		        echo $category->name;
+	        endforeach;
+        }
         ?>
       </span>
       <h3 class="root_title"><?php the_title(); ?></h3>
