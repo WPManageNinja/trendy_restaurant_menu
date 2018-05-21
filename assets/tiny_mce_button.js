@@ -54,7 +54,7 @@
         </div>
     `);
 
-    jQuery('.close').click(function() {
+    jQuery('.modal-content').on('click', '.close', function() {
         jQuery('#myModal').css('display', 'none');
     });
 
@@ -62,7 +62,7 @@
        jQuery('input[name=radioMeal]:checked', '#meal').val(); 
     });
 
-    jQuery('#meal').on('click', function () {
+    jQuery('.modal-content').on('click', '#meal', function () {
         var value = jQuery("[name=radioMeal]:checked").val();
         if(value === 'custom') {
            jQuery('#custom_meal_items').css('display', 'block');
@@ -75,7 +75,7 @@
        jQuery('input[name=radioDish]:checked', '#dish').val(); 
     });
 
-    jQuery('#dish').on('click', function () {
+    jQuery('.modal-content').on('click', '#dish', function () {
         var value = jQuery("[name=radioDish]:checked").val();
         if(value === 'custom') {
            jQuery('#custom_dish_items').css('display', 'block');
@@ -84,56 +84,69 @@
         }
     });
 
-tinymce.PluginManager.add( 'res_ninja_shortcodes', function( editor, url ) {
+    var myModal = jQuery('.modal-content');
+
+    var modalContent = myModal.html();
+
+    tinymce.PluginManager.add( 'res_ninja_shortcodes', function( editor, url ) {
         editor.addButton( 'shortCode', {
             text: 'Restaurant Menu ShortCode',
             icon: false,
             onclick: function() {
                 jQuery('.modal').css('display', 'block');
+
+                myModal.html(modalContent);
                 
                 jQuery(document).on('click', '.save', function(e) {
+
                     e.preventDefault();
                     var display = jQuery('#display').val();
-                    var selectedMeal = $('input:radio[name="radioMeal"]:checked').val();
-                    var location = jQuery('input:checkbox:checked.location_class').map(function() {
+                    var selectedMeal = myModal.find('input:radio[name="radioMeal"]:checked').val();
+
+                    var location = myModal.find('input:checkbox:checked.location_class').map(function() {
                         return this.value;
                     }).get().join(", ");
-                    if(location === '') {
-                        console.log('It is null');
-                    }
+
+
                     if(selectedMeal != 'default') {
-                        var selectedMeal = jQuery('input:checkbox:checked.meal_items_class').map(function() {
+                        var selectedMeal = myModal.find('input:checkbox:checked.meal_items_class').map(function() {
                             return this.value;
                         }).get().join(", ");
                     }
+
                     if(selectedMeal.length === 0) {
                         selectedMeal = 'default';
                     }
-                    var selectedDish = $('input:radio[name="radioDish"]:checked').val();
+
+                    var selectedDish = myModal.find('input:radio[name="radioDish"]:checked').val();
                     if(selectedDish != 'default') {
-                        var selectedDish = jQuery('input:checkbox:checked.dish_items_class').map(function() {
+                        var selectedDish = myModal.find('input:checkbox:checked.dish_items_class').map(function() {
                             return this.value;
                         }).get().join(", ");
                     }
+
                     if(selectedDish.length === 0) {
                         selectedDish = 'default';
                     }
+
                     if(display === 'default' && selectedMeal === 'default' && selectedDish === 'default' && location === '') {
                         editor.insertContent('[restaurant_menu]');
                     }
-                    else if(display != 'default' && selectedMeal === 'default' && selectedDish === 'default') {
+
+                    else if(display != 'default' && selectedMeal === 'default' && selectedDish === 'default' && location === '') {
                         editor.insertContent('[restaurant_menu display="' + display + '"]');
                     }
+                    
                     else if(display != 'default' && selectedMeal != 'default'  && selectedDish != 'default' && location != '') {
                         editor.insertContent('[restaurant_menu display="' + display + '" meal_type="' +selectedMeal+'" dish_type="' +selectedDish+'" location="' +location+'"]');
                     }
                     else if(display != 'default' && selectedMeal != 'default' && selectedDish != 'default') {
                         editor.insertContent('[restaurant_menu display="' + display + '" meal_type="' +selectedMeal+'" dish_type="' +selectedDish+'"]');
                     }
-                    else if(display != 'default' || selectedMeal != 'default') {
+                    else if(display != 'default' && selectedMeal != 'default') {
                         editor.insertContent('[restaurant_menu display="' + display + '" meal_type="' +selectedMeal+'"]');
                     }
-                    else if(display != 'default' || selectedDish != 'default') {
+                    else if(display != 'default' && selectedDish != 'default') {
                         editor.insertContent('[restaurant_menu display="' + display + '" dish_type="' +selectedDish+'"]');
                     }
                     else if(display === 'default' && selectedMeal != 'default'  && selectedDish != 'default') {
@@ -142,7 +155,10 @@ tinymce.PluginManager.add( 'res_ninja_shortcodes', function( editor, url ) {
                     else if(display != 'default' && selectedMeal != 'default'  && selectedDish != 'default' && location != '') {
                         editor.insertContent('[restaurant_menu display="' + display + '" meal_type="' +selectedMeal+'" dish_type="' +selectedDish+'" location="' +location+'"]');
                     }
-                    jQuery('.location_class').toggle();
+                    else if((display === 'default' || display != 'default') && location != '') {
+
+                    editor.insertContent('[restaurant_menu display="' + display + '" location="' +location+'"]');
+                    }
                     jQuery('.modal').css('display', 'none');
                 });
             }
