@@ -71,6 +71,7 @@ class RestaurantMenu {
 		// add_action('widgets_init', array($this,'rlResMenuWidget') );
 
 		add_action( 'current_screen' , array($this,'resCustomButton'));
+		add_action('admin_enqueue_scripts', array($this, 'load_custom_admin_style'));
 	}
 
 	// public function rlResMenuWidget(){
@@ -112,6 +113,11 @@ class RestaurantMenu {
 	  }
 
 
+
+	public function load_custom_admin_style() {
+	    wp_register_style('custom_wp_admin_css', RESTAURANT_MENU_PLUGIN_URL . 'assets/admin_tiny.css');
+	    wp_enqueue_style('custom_wp_admin_css');
+	}
 
 
 }
