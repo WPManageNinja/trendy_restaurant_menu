@@ -1,7 +1,6 @@
 ( function() {
     jQuery('body').append(`
         <div id="myModal" class="modal">
-
           <!— Modal content —>
           <div class="modal-content">
             <span class="close">&times;</span>

@@ -85,4 +85,13 @@ class HelperClass {
 		
 		return $formattedNutrition;
 	}
+	
+	public static function getTermsFormatted($args = array()) {
+		$terms = get_terms( $args );
+		$formatted = array();
+		foreach ($terms as $term) {
+			$formatted[$term->slug] = $term->name;
+		}
+		return $formatted;
+	}
 }

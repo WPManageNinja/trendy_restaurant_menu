@@ -1,0 +1,89 @@
+.mce-i-trendy_restaurant_mce_class {
+  background: red;
+}
+
+div#trendy_res_pop_up {
+
+  .trendy_pop_shadow {
+    background: #000;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100050;
+  }
+
+  .trendy_pop_container {
+    position: absolute;
+    width: 50%;
+    min-width: 600px;
+    top: 150px;
+    left: 0%;
+    right: 0%;
+    background: white;
+    z-index: 100100;
+    color: black;
+    margin: 0 auto;
+
+    .trendy_pop_header {
+      padding: 5px 0px 5px 15px;
+      color: #6c6b6b;
+      border-bottom: 1px solid #6c6b6b;
+      font-size: 17px;
+      line-height: 30px;
+      span.trendy_pop_close {
+        float: right;
+        border-left: 1px solid #6c6b6b;
+        padding-left: 10px;
+        display: block;
+        color: black;
+        cursor: pointer;
+        padding-right: 10px;
+      }
+    }
+
+    .trendy_pop_body {
+      padding-top: 10px;
+      .tres_options_group {
+        display: block;
+        width: auto;
+        overflow: hidden;
+        margin-bottom: 10px;
+        background: #fdf9f9;
+        padding: 10px 20px;
+        box-shadow: 0px 1px 1px 1px #d2d2d2;
+      }
+      .tres_form_group {
+        margin-bottom: 15px;
+        > label {
+          font-size: 14px;
+          font-weight: bold;
+          display: block;
+          margin-bottom: 5px;
+        }
+      }
+      
+      .tres_inline_form_items {
+        display: block;
+        width: 100%;
+        label {
+          margin-right: 10px;
+        }
+      }
+      
+    }
+
+    .trendy_pop_footer {
+      display: block;
+      background: #f5f5f5;
+      padding: 10px;
+      text-align: right;
+    }
+    
+  }
+  
+}
+
