@@ -41,6 +41,7 @@ const restaurantMenuApp = {
         var that = this;
         jQuery('.res_item_modal').on('click', function (event) {
             event.preventDefault();
+             jQuery('body').css('overflow', 'hidden');
             let itemId = jQuery(this).attr('data-res_menu_id');
             if (itemId) {
                 that.fetchItem(itemId);
