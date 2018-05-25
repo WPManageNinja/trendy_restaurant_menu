@@ -12,9 +12,7 @@
         <div class="res-item res_gid_<?php echo $per_grid; ?> res_item_id_<?php echo $item->ID; ?>  <?php echo $modalClass; ?>"
              data-res_menu_id="<?php echo $item->ID; ?>">
             <div class="res_featured_image">
-                <a href="<?php get_the_permalink( $item ); ?>">
-					<?php echo get_the_post_thumbnail( $item, $mediaSize ); ?>
-                </a>
+                <?php echo get_the_post_thumbnail( $item, $mediaSize ); ?>
 	            <?php if ( $item->price ): ?>
                     <span class="res_item_price"> <?php echo $currency; ?><?php echo $item->price; ?></span>
 	            <?php endif; ?>

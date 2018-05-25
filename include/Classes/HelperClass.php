@@ -91,4 +91,21 @@ class HelperClass {
 		}
 		return $formatted;
 	}
+	
+	public static function getDisplayTypes() {
+		return array(
+			'default'        => array(
+				'label' => 'Default'
+			),
+			'center_aligned' => array(
+				'label' => 'Center Aligned'
+			),
+			'simple'         => array(
+				'label' => 'Simple Food Menu'
+			),
+			'grid'           => array(
+				'label' => 'Grid Styled Menu'
+			)
+		);
+	}
 }

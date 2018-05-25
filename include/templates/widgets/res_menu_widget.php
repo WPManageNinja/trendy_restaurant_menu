@@ -1,55 +1,80 @@
-<p> 
+<div class="tr_widget_item"> 
 	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"> <?php esc_attr_e( 'Title:', 'restaurant_menu' ); ?> </label> 
 	<input type="text" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo $title ; ?>" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-</p>
+</div>
 
-<p> 
-	<label for="<?php echo esc_attr( $this->get_field_id( '_res_display_widget' ) ); ?>"> <?php esc_attr_e( 'Display:', 'restaurant_menu' ); ?> </label> 
-	<select name="<?php echo esc_attr( $this->get_field_name( '_res_display_widget' ) ); ?>" class="widefat" id="<?php echo esc_attr( $this->get_field_id( '_res_display_widget' ) ); ?>"> 
-		<option value="default" <?php selected($_res_display_widget,'default'); ?>> Default </option> 
-		<option value="dish_type_menu" <?php selected($_res_display_widget,'dish_type_menu'); ?>> Dish Type Menu </option> 
-		<option value="featured_style_a" <?php selected($_res_display_widget,'featured_style_a'); ?>> Featured Style A </option> 
-		<option value="featured_style_b" <?php selected($_res_display_widget,'featured_style_b'); ?>> Featured Style B </option> 
-		<option value="featured_style_c" <?php selected($_res_display_widget,'featured_style_c'); ?>> Featured Style C </option> 
-		<option value="simple_food_menu" <?php selected($_res_display_widget,'simple_food_menu'); ?>> Simple Food Menu </option> 
-		<option value="centered_aligned_menu" <?php selected($_res_display_widget,'centered_aligned_menu'); ?>> Centered Aligned Menu </option> 
+<div class="tr_widget_item">
+<label for="<?php echo esc_attr( $this->get_field_id( '_res_display_widget' ) ); ?>"> <?php esc_attr_e( 'Display:', 'restaurant_menu' ); ?> </label>
+	<select name="<?php echo esc_attr( $this->get_field_name( '_res_display_widget' ) ); ?>" class="widefat" id="<?php echo esc_attr( $this->get_field_id( '_res_display_widget' ) ); ?>">
+		<?php foreach ($displayTypes as $display_key => $display): ?>
+            <option value="<?php echo $display_key; ?>" <?php selected($_res_display_widget,$display_key); ?>> <?php echo $display['label']; ?> </option>
+        <?php endforeach; ?>
 	</select>
+</div>
 
-</p>
-
-<p> 
-	<span> <?php esc_attr_e( 'Meal Type:', 'restaurant_menu' ); ?> </span>
-	<?php foreach ($mealTypeItems as $key => $mealTypeItem ) : ?>
-		<label for="<?php echo $this->get_field_id("_res_meal_type_widget") . $key; ?>"> <?php echo $mealTypeItem->name; ?> </label> 
-		<input class="checkbox" id="<?php echo $this->get_field_id("_res_meal_type_widget") . $key; ?>" name="<?php echo $this->get_field_name("_res_meal_type_widget");?>[]" type="checkbox" value="<?php echo $mealTypeItem->slug;  ?>" <?php checked(in_array($mealTypeItem->slug, $_res_meal_type_widget)) ; ?> >
+<div class="tr_widget_item">
+	<h4> <?php esc_attr_e( 'Meal Types:', 'tr_menu' ); ?> </h4>
+<p><small><?php esc_attr_e( 'Don\'t select any if you want to show all types', 'tr_menu' );?></small></p>
+	<?php foreach ($mealTypes as $mealTypeKey => $mealTypeItem ) : ?>
+		<label>
+            <input class="checkbox" name="<?php echo $this->get_field_name("_res_meal_type_widget");?>[]" type="checkbox" value="<?php echo $mealTypeKey;?>" <?php checked(in_array($mealTypeKey, $_res_meal_type_widget)) ; ?> >
+            <?php echo $mealTypeItem; ?> 
+        </label>
 	<?php endforeach; ?>
-</p>
+</div>
 
-<p> 
-	<span> <?php esc_attr_e( 'Dish Type:', 'restaurant_menu' ); ?> </span>
-	<?php foreach ($dishTypeItems as $key => $dishTypeItem ) : ?>
-		<label for="<?php echo $this->get_field_id("_res_dish_type_widget") . $key; ?>"> <?php echo $dishTypeItem->name; ?> </label> 
-		<input class="checkbox" id="<?php echo $this->get_field_id("_res_dish_type_widget") . $key; ?>" name="<?php echo $this->get_field_name("_res_dish_type_widget");?>[]" type="checkbox" value="<?php echo $dishTypeItem->slug; ?>" <?php checked(in_array($dishTypeItem->slug, $_res_dish_type_widget)); ?> >
+<div class="tr_widget_item">
+    <h4> <?php esc_attr_e( 'Dish Types:', 'tr_menu' ); ?> </h4>
+    <p><small><?php esc_attr_e( 'Don\'t select any if you want to show all types', 'tr_menu' );?></small></p>
+	<?php foreach ($dishTypes as $dishTypeKey => $dishTypeItem ) : ?>
+        <label>
+            <input class="checkbox" name="<?php echo $this->get_field_name("_res_dish_type_widget");?>[]" type="checkbox" value="<?php echo $dishTypeKey;?>" <?php checked(in_array($dishTypeKey, $_res_dish_type_widget)) ; ?> >
+			<?php echo $dishTypeItem; ?>
+        </label>
 	<?php endforeach; ?>
-</p>
+</div>
 
-<p> 
-	<span> <?php esc_attr_e( 'Location:', 'restaurant_menu' ); ?> </span>
-	<?php foreach ($resLocations as $key => $resLocation ) : ?>
-		<label for="<?php echo $this->get_field_id("_res_location_widget") . $key; ?>"> <?php echo $resLocation->name; ?> </label> 
-		<input class="checkbox" id="<?php echo $this->get_field_id("_res_location_widget") . $key; ?>" name="<?php echo $this->get_field_name("_res_location_widget");?>[]" type="checkbox" value="<?php echo $resLocation->slug; ?>" <?php checked(in_array($resLocation->slug, $_res_location_widget)); ?> >
+<div class="tr_widget_item">
+    <h4> <?php esc_attr_e( 'Dish Types:', 'tr_menu' ); ?> </h4>
+    <p><small><?php esc_attr_e( 'Don\'t select any if you want to show all locations', 'tr_menu' );?></small></p>
+	<?php foreach ($locations as $locationKey => $locationItem ) : ?>
+        <label>
+            <input class="checkbox" name="<?php echo $this->get_field_name("_res_location_widget");?>[]" type="checkbox" value="<?php echo $locationKey;?>" <?php checked(in_array($locationKey, $_res_location_widget)) ; ?> >
+			<?php echo $locationItem; ?>
+        </label>
 	<?php endforeach; ?>
-</p>
+</div>
 
 
-<p> 
-	<label for="<?php echo esc_attr( $this->get_field_id( '_res_limit_widget' ) ); ?>"> <?php esc_attr_e( 'Number of posts to show:', 'restaurant_menu' ); ?> </label> 
-	<input type="number" name="<?php echo esc_attr( $this->get_field_name( '_res_limit_widget' ) ); ?>" class="tiny-text" step="1" min="1" size="3" value="<?php echo esc_attr( $_res_limit_widget ); ?>" id="<?php echo esc_attr( $this->get_field_id( '_res_limit_widget' ) ); ?>">
-</p>
+<div class="tr_widget_item">
+	<label>
+        <?php esc_attr_e( 'Number of posts to show:', 'restaurant_menu' ); ?> 
+    </label> 
+	<input type="number" name="<?php echo esc_attr( $this->get_field_name( '_res_limit_widget' ) ); ?>" class="tiny-text" step="1" min="1" size="3" value="<?php echo esc_attr( $_res_limit_widget ); ?>">
+</div>
 
-<p> 
-	<input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( '_res_disable_modal_widget' ) ); ?>"  value="1" <?php checked( $_res_disable_modal_widget, 1 ); ?> id="<?php echo esc_attr( $this->get_field_id( '_res_disable_modal_widget' ) ); ?>">
-	<label for="<?php echo esc_attr( $this->get_field_id( '_res_disable_modal_widget' ) ); ?>"> <?php esc_attr_e( 'Disable Modal', 'restaurant_menu' ); ?> </label> 
-</p>
+<div class="tr_widget_item">
+	<label>
+        <input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( '_res_disable_modal_widget' ) ); ?>"  value="1" <?php checked( $_res_disable_modal_widget, 1 ); ?> id="<?php echo esc_attr( $this->get_field_id( '_res_disable_modal_widget' ) ); ?>">
+        <?php esc_attr_e( 'Disable Modal', 'tr_menu' ); ?>
+    </label>
+</div>
 
+<style type="text/css">
+    .tr_widget_item {
+        margin-bottom: 10px;
+    }
 
+    .tr_widget_item label {
+        margin-bottom: 7px;
+        display: block;
+    }
+
+    .tr_widget_item h4 {
+        margin: 10px 0px 0px;
+    }
+
+    .tr_widget_item p {
+        margin: 5px 0px !important;
+    }
+</style> 

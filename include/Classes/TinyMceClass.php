@@ -37,21 +37,7 @@ class TinyMceClass {
 	}
 
 	public static function localizeVars() {
-		$displayTypes = array(
-			'default'        => array(
-				'label' => 'Default'
-			),
-			'center_aligned' => array(
-				'label' => 'Center Aligned'
-			),
-			'simple'         => array(
-				'label' => 'Simple Food Menu'
-			),
-			'grid'           => array(
-				'label' => 'Grid Styled Menu'
-			)
-		);
-
+		$displayTypes = HelperClass::getDisplayTypes();
 		$mealTypes = HelperClass::getTermsFormatted(array(
 			'taxonomy' => PostTypeClass::$mealTypeName,
 			'hide_empty' => false,
