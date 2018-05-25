@@ -1,12 +1,10 @@
-<div class="res_single_item_content">
+<div class="tr_single_item_content">
 	<?php if ( $nutrition ) : ?>
-        <div class="res_hr"></div>
-        <span class="rl_menu_icon">
-          <i class="fa fa-cutlery"></i>
-        </span>
-        <div class="rl_inner">
-            <h4><?php _e( 'Nutrition', 'restaurant_menu' ); ?></h4>
-            <div class="rl_nutritions rl_text">
+        <div class="tr_inner_content tr_nutrition">
+            <h4 class="tr_inner_title">
+				<?php _e( 'Nutrition', 'tr_menu' ); ?>
+            </h4>
+            <div class="tr_nutrition_lists">
                 <ul class="nutrition_info">
 					<?php foreach ( $nutrition as $nutrition_label => $nutrition_value ): ?>
                         <li>
@@ -19,19 +17,23 @@
         </div>
 	<?php endif; ?>
 	<?php if ( $ingredients ): ?>
-        <div class="res_hr"></div>
-        <div class="ingredients">
-      <span class="rl_menu_icon">
-        <i class="fa fa-book"></i>
-      </span>
-            <div class="rl_inner">
-                <h4 class="rl_popup_option_title"><?php _e( 'Ingredients', 'restaurant_menu' ); ?></h4>
-                <div class="clear"></div>
-                <div class="rl_text ffgeo">
-					<?php echo $ingredients; ?>
-                </div>
-                <div class="clear"></div>
+        <div class="tr_inner_content tr_nutrition">
+            <h4 class="tr_inner_title">
+				<?php _e( 'Ingredients', 'tr_menu' ); ?>
+            </h4>
+            <div class="ingredients">
+				<?php echo $ingredients; ?>
             </div>
         </div>
 	<?php endif; ?>
+	<?php
+	$categories = wp_get_post_terms( $post_id, \RestaurantMenu\Classes\PostTypeClass::$mealTypeName );
+	if ( count( $categories ) ):
+		echo '<div class="tr_tax_items">';
+		foreach ( $categories as $category ):
+			echo '<span>' . $category->name . '</span>';
+		endforeach;
+		echo "</div>";
+	endif;
+	?>
 </div>

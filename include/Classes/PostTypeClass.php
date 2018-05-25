@@ -4,37 +4,40 @@ namespace RestaurantMenu\Classes;
 
 class PostTypeClass {
 	
-	private $postTypeName = 'restaurant_menu';
+	public static $postTypeName = 'tr_menu';
+	public static $mealTypeName = 'tr_meal_type';
+	public static $dishTypeName = 'tr_dish_type';
+	public static $locationTypeName = 'tr_location_type';
 	
-	public function initRestaurantPostType()
+	public static function initRestaurantPostType()
 	{
-		$this->registerRestaurantMenuCPT();
-		$this->registerMealType();
-		$this->registerDishType();
-		$this->registerLocationArea();
+		self::registerRestaurantMenuCPT();
+		self::registerMealType();
+		self::registerDishType();
+		self::registerLocationArea();
 	}
 	
-	private function registerRestaurantMenuCPT() {
-		$urlSlug = apply_filters('ninja_restaurant_menu_url_slug', 'restaurant_menu');
+	private static function registerRestaurantMenuCPT() {
+		$urlSlug = apply_filters('trendy_restaurant_menu_url_slug', 'tr_menu');
 		$labels = array(
-			'name'               => _x( 'Menu Items', 'post type general name', 'restaurant_menu' ),
-			'singular_name'      => _x( 'Menu Item', 'post type singular name', 'restaurant_menu' ),
-			'menu_name'          => _x( 'Restaurant Menu', 'admin menu', 'restaurant_menu' ),
-			'name_admin_bar'     => _x( 'Restaurant Menu', 'add new on admin bar', 'restaurant_menu' ),
-			'add_new'            => _x( 'Add New', 'menu', 'restaurant_menu' ),
-			'add_new_item'       => __( 'Add New Menu', 'restaurant_menu' ),
-			'new_item'           => __( 'New Menu', 'restaurant_menu' ),
-			'edit_item'          => __( 'Edit Menu', 'restaurant_menu' ),
-			'view_item'          => __( 'View Menu', 'restaurant_menu' ),
-			'all_items'          => __( 'All Restaurant Menus', 'restaurant_menu' ),
-			'search_items'       => __( 'Search Restaurant Menus', 'restaurant_menu' ),
-			'parent_item_colon'  => __( 'Parent Restaurant Menu:', 'restaurant_menu' ),
-			'not_found'          => __( 'No restaurant menus found.', 'restaurant_menu' ),
-			'not_found_in_trash' => __( 'No restaurant menus found in Trash.', 'restaurant_menu' ),
+			'name'               => _x( 'Menu Items', 'post type general name', 'tr_menu' ),
+			'singular_name'      => _x( 'Menu Item', 'post type singular name', 'tr_menu' ),
+			'menu_name'          => _x( 'Restaurant Menu', 'admin menu', 'tr_menu' ),
+			'name_admin_bar'     => _x( 'Restaurant Menu', 'add new on admin bar', 'tr_menu' ),
+			'add_new'            => _x( 'Add New', 'menu', 'tr_menu' ),
+			'add_new_item'       => __( 'Add New Menu', 'tr_menu' ),
+			'new_item'           => __( 'New Menu', 'tr_menu' ),
+			'edit_item'          => __( 'Edit Menu', 'tr_menu' ),
+			'view_item'          => __( 'View Menu', 'tr_menu' ),
+			'all_items'          => __( 'All Restaurant Menus', 'tr_menu' ),
+			'search_items'       => __( 'Search Restaurant Menus', 'tr_menu' ),
+			'parent_item_colon'  => __( 'Parent Restaurant Menu:', 'tr_menu' ),
+			'not_found'          => __( 'No restaurant menus found.', 'tr_menu' ),
+			'not_found_in_trash' => __( 'No restaurant menus found in Trash.', 'tr_menu' ),
 		);
 		$args = array(
 			'labels'             => $labels,
-			'description'        => __( 'Description.', 'restaurant_menu' ),
+			'description'        => __( 'Description.', 'tr_menu' ),
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
@@ -45,26 +48,27 @@ class PostTypeClass {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 21,
-			'menu_icon'          => 'dashicons-welcome-widgets-menus',
+			'menu_icon'          => 'data:image/svg+xml;base64,'
+			                        . base64_encode(self::getIconSVG()),
 			'supports'           => array( 'title', 'thumbnail', 'editor', 'excerpt' )
 		);
-		register_post_type( $this->postTypeName, $args );
+		register_post_type( self::$postTypeName, $args );
 	}
 	
-	private function registerMealType() {
-		$mealTypeSlug = apply_filters('ninja_restaurant_menu_meal_type_url_slug', 'restaurant_menu_meal_type');
+	private static function registerMealType() {
+		$mealTypeSlug = apply_filters('trendy_restaurant_menu_meal_type_url_slug', 'tr_meals');
 		$MealTypeLabels = array(
-			'name'              => _x( 'Meal Type', 'taxonomy general name', 'restaurant_menu' ),
-			'singular_name'     => _x( 'Meal Type', 'taxonomy singular name', 'restaurant_menu' ),
-			'search_items'      => __( 'Search Meal Type', 'restaurant_menu' ),
-			'all_items'         => __( 'All Meal Type', 'restaurant_menu' ),
-			'parent_item'       => __( 'Parent Meal Type', 'restaurant_menu' ),
-			'parent_item_colon' => __( 'Parent Meal Type:', 'restaurant_menu' ),
-			'edit_item'         => __( 'Edit Meal Type', 'restaurant_menu' ),
-			'update_item'       => __( 'Update Meal Type', 'restaurant_menu' ),
-			'add_new_item'      => __( 'Add New Meal Type', 'restaurant_menu' ),
-			'new_item_name'     => __( 'New Meal Type Name', 'restaurant_menu' ),
-			'menu_name'         => __( 'Meal Type', 'restaurant_menu' ),
+			'name'              => _x( 'Meal Type', 'taxonomy general name', 'tr_menu' ),
+			'singular_name'     => _x( 'Meal Type', 'taxonomy singular name', 'tr_menu' ),
+			'search_items'      => __( 'Search Meal Type', 'tr_menu' ),
+			'all_items'         => __( 'All Meal Type', 'tr_menu' ),
+			'parent_item'       => __( 'Parent Meal Type', 'tr_menu' ),
+			'parent_item_colon' => __( 'Parent Meal Type:', 'tr_menu' ),
+			'edit_item'         => __( 'Edit Meal Type', 'tr_menu' ),
+			'update_item'       => __( 'Update Meal Type', 'tr_menu' ),
+			'add_new_item'      => __( 'Add New Meal Type', 'tr_menu' ),
+			'new_item_name'     => __( 'New Meal Type Name', 'tr_menu' ),
+			'menu_name'         => __( 'Meal Type', 'tr_menu' ),
 		);
 		$mealTypeArgs = array(
 			'hierarchical'      => true,
@@ -74,23 +78,23 @@ class PostTypeClass {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => $mealTypeSlug ),
 		);
-		register_taxonomy( 'rl_res_meal_cat', array( $this->postTypeName ), $mealTypeArgs );
+		register_taxonomy( self::$mealTypeName, array( self::$postTypeName ), $mealTypeArgs );
 	}
 	
-	private function registerDishType() {
-		$dishTypeSlug = apply_filters('ninja_restaurant_menu_dish_type_url_slug', 'restaurant_menu_dish_type');
+	private static function registerDishType() {
+		$dishTypeSlug = apply_filters('trendy_restaurant_menu_dish_type_url_slug', 'tr_dishes');
 		$dishTypeLabels = array(
-			'name'              => _x( 'Dish Type', 'taxonomy general name', 'restaurant_menu' ),
-			'singular_name'     => _x( 'Dish Type', 'taxonomy singular name', 'restaurant_menu' ),
-			'search_items'      => __( 'Search Dish Type', 'restaurant_menu' ),
-			'all_items'         => __( 'All Dish Type', 'restaurant_menu' ),
-			'parent_item'       => __( 'Parent Dish Type', 'restaurant_menu' ),
-			'parent_item_colon' => __( 'Parent Dish Type:', 'restaurant_menu' ),
-			'edit_item'         => __( 'Edit Dish Type', 'restaurant_menu' ),
-			'update_item'       => __( 'Update Dish Type', 'restaurant_menu' ),
-			'add_new_item'      => __( 'Add New Dish Type', 'restaurant_menu' ),
-			'new_item_name'     => __( 'New Dish Type Name', 'restaurant_menu' ),
-			'menu_name'         => __( 'Dish Type', 'restaurant_menu' ),
+			'name'              => _x( 'Dish Type', 'taxonomy general name', 'tr_menu' ),
+			'singular_name'     => _x( 'Dish Type', 'taxonomy singular name', 'tr_menu' ),
+			'search_items'      => __( 'Search Dish Type', 'tr_menu' ),
+			'all_items'         => __( 'All Dish Type', 'tr_menu' ),
+			'parent_item'       => __( 'Parent Dish Type', 'tr_menu' ),
+			'parent_item_colon' => __( 'Parent Dish Type:', 'tr_menu' ),
+			'edit_item'         => __( 'Edit Dish Type', 'tr_menu' ),
+			'update_item'       => __( 'Update Dish Type', 'tr_menu' ),
+			'add_new_item'      => __( 'Add New Dish Type', 'tr_menu' ),
+			'new_item_name'     => __( 'New Dish Type Name', 'tr_menu' ),
+			'menu_name'         => __( 'Dish Type', 'tr_menu' ),
 		);
 		$dishTypeArgs = array(
 			'hierarchical'      => true,
@@ -100,23 +104,23 @@ class PostTypeClass {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => $dishTypeSlug ),
 		);
-		register_taxonomy( 'rl_res_dish_cat', array( $this->postTypeName ), $dishTypeArgs );
+		register_taxonomy( self::$dishTypeName, array( self::$postTypeName ), $dishTypeArgs );
 	}
 	
-	private function registerLocationArea() {
-		$locationSlug = apply_filters('ninja_restaurant_menu_location_url_slug', 'restaurant_menu_dish_type');
+	private static function registerLocationArea() {
+		$locationSlug = apply_filters('trendy_restaurant_menu_location_url_slug', 'tr_locations');
 		$locationLabels = array(
-			'name'              => _x( 'Location', 'taxonomy general name', 'restaurant_menu' ),
-			'singular_name'     => _x( 'Location', 'taxonomy singular name', 'restaurant_menu' ),
-			'search_items'      => __( 'Search Location', 'restaurant_menu' ),
-			'all_items'         => __( 'All Location', 'restaurant_menu' ),
-			'parent_item'       => __( 'Parent Location', 'restaurant_menu' ),
-			'parent_item_colon' => __( 'Parent Location:', 'restaurant_menu' ),
-			'edit_item'         => __( 'Edit Location', 'restaurant_menu' ),
-			'update_item'       => __( 'Update Location', 'restaurant_menu' ),
-			'add_new_item'      => __( 'Add New Location', 'restaurant_menu' ),
-			'new_item_name'     => __( 'New Location Name', 'restaurant_menu' ),
-			'menu_name'         => __( 'Location', 'restaurant_menu' ),
+			'name'              => _x( 'Locations', 'taxonomy general name', 'tr_menu' ),
+			'singular_name'     => _x( 'Location', 'taxonomy singular name', 'tr_menu' ),
+			'search_items'      => __( 'Search Location', 'tr_menu' ),
+			'all_items'         => __( 'All Locations', 'tr_menu' ),
+			'parent_item'       => __( 'Parent Location', 'tr_menu' ),
+			'parent_item_colon' => __( 'Parent Location:', 'tr_menu' ),
+			'edit_item'         => __( 'Edit Location', 'tr_menu' ),
+			'update_item'       => __( 'Update Location', 'tr_menu' ),
+			'add_new_item'      => __( 'Add New Location', 'tr_menu' ),
+			'new_item_name'     => __( 'New Location Name', 'tr_menu' ),
+			'menu_name'         => __( 'Location', 'tr_menu' ),
 		);
 		$locationArgs = array(
 			'hierarchical'      => true,
@@ -126,6 +130,11 @@ class PostTypeClass {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => $locationSlug ),
 		);
-		register_taxonomy( 'rl_res_location_cat', array( $this->postTypeName ), $locationArgs );
+		register_taxonomy( self::$locationTypeName, array( self::$postTypeName ), $locationArgs );
 	}
+	
+	private static function getIconSVG() {
+		return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 35.96"><defs><style>.cls-1{fill:#fff;}</style></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M22.9,2.4a2.84,2.84,0,0,0-5.62,0Z"/><rect class="cls-1" x="3.23" y="16.88" width="33.71" height="1.38"/><path class="cls-1" d="M20.09,3.19A14.47,14.47,0,0,0,5.76,15.43H34.42A14.47,14.47,0,0,0,20.09,3.19ZM15.51,7.3a6.78,6.78,0,0,0-4.39,4,.73.73,0,0,1-1.36-.53,8.23,8.23,0,0,1,5.33-4.88.72.72,0,1,1,.42,1.39Z"/><path class="cls-1" d="M22,20.83c.22,0,.3.09.25.26a1.66,1.66,0,0,1-.38.58,4.73,4.73,0,0,1-.69.62,2.38,2.38,0,0,1-.72.39,3.55,3.55,0,0,1-.65,0l-1.19,0-1.49,0-1.52,0-1.31,0a6.66,6.66,0,0,0-.8,0L10.91,25,8.43,27.42,5.75,30l-2.4,2.28L1.66,33.85a.36.36,0,0,1-.42,0,1.41,1.41,0,0,1-.46-.42,1.39,1.39,0,0,1-.25-.62.63.63,0,0,1,.18-.57L2.05,30.9,4,29q1.06-1.05,2.21-2.15l2.08-2,1.57-1.54q.64-.62.74-.68-1.93.1-4,.4t-4.23.79a.09.09,0,0,0,0,.06c.26,0,.53,0,.82,0h.88q-.2.13-.16.13l-1.62.31-1.65.31a1,1,0,0,1-.47-.16A.27.27,0,0,1,.06,24l.47-.71q.28-.42.57-.83a5.62,5.62,0,0,1,.59-.7,1.05,1.05,0,0,1,.49-.32l1-.08,1.11-.1,1-.08.64,0q4.05-.16,8-.26T22,20.83ZM2,22.93v0l-.1.07,0,0Zm.13,0v0L2,23l0,.06Zm.29-.1v0l-.1.06v0Zm.29,8.45-.07,0,0,0Zm.26,0h0l-.07,0,0,0Zm.46-8.71v0H3.3v0h.1Zm.92-.32v0h-.1v0Zm.56,7.42,0,0-.06.06v0l-.1.06.07,0ZM5,22.38v0h-.1v0h-.1v.07Zm0,7,0,0-.13.1h0l.07,0Zm.46-7.22v0H5.23v0h.23Zm.16,6.48,0,0-.07.07h0Zm.2.39-.07.07v0Zm1.08-6.54v-.06l-.1,0v0H6.7v0H6.5v0l-.1,0v0H6.17v0H6v0h.13v0h.1v0l.13,0v0h.1v0h.1v0h.2v.06ZM6.76,22v0l.1,0v0Zm.36,5.34,0,0L7,27.4h0Zm.13,0,0,0-.07.07h0ZM7.48,27l0,0,0,.06v0Zm.23,0,0,0-.07.06,0,0Zm.23-4.92-.07,0h-.1v0Zm.1,0h.1v0H8Zm.13.26v0l-.1,0v0Zm0-.52v0l-.1,0v0Zm.46.26v0H8.53v0Zm.07,4.21v0l-.07.07,0,0Zm.13-4.6v0H8.72l0,0Zm0,4.18h0l0,.1Zm.1.36h0l0,.06Zm0-.81h0l0,0v0Zm.1-3.63v0l-.1,0v0Zm.07,3.79,0,0,0,.06Zm.1.23,0-.06-.07.1h0Zm.07-.32,0,0-.07.07,0,0Zm.88-1.13-.07.06v0l-.07.1h0l0,0h0l-.07.06v0l-.07.06-.13.13-.07.06,0,0,.07-.06.07,0h0l.1-.16v0l.07-.06,0,0,.1-.16h0Zm-.23.65,0,0,0,.06Zm.56-3v0h-.1v0Zm0,1.68v0l-.07.07Zm.16-1.52v0h-.1v0Zm.07,1.81h0l0,0h0l-.07.06,0,0Zm.07-.36,0,0-.1.1v0l.07-.07Zm.33-1.59h.1l-.1,0Zm.13,1.23h0l0,0v0Zm.07-1.13h-.1v0h.1Zm1-.19,0,0,0,.06v0Zm.2-.13v0l-.07.06Zm.13,0h0l-.07.06h0Zm1,.39h-.1v0h.1Zm.1-.55h-.1v0h.1Zm1.14.36h-.1v0h-.1v.06h.2Zm.42-.26h-.23v0h.1v0h.13Zm3,.06h-.1v0h.1Zm.23.19h-.13v0h.13Z"/><path class="cls-1" d="M13.43,29.31a1.2,1.2,0,0,1,.44-.21c.1,0,.15,0,.16.08a.45.45,0,0,1-.07.26,1.13,1.13,0,0,1-.21.29q-.16.16-.62.68t-1,1.05a10.05,10.05,0,0,1-1.16.94,1.66,1.66,0,0,1-1,.37l-.36,0a.78.78,0,0,1-.46-.15,1.71,1.71,0,0,1-.6-.79A1,1,0,0,1,8.63,31a7.91,7.91,0,0,1,1-1.33q.57-.61,1.23-1.23a.06.06,0,0,1,.07-.06l-.52,0a1,1,0,0,0-.36,0,1.16,1.16,0,0,0-.31.15,2.65,2.65,0,0,0-.38.32l-.54.55q-.21.23-.51.49A.72.72,0,0,1,8,30a.36.36,0,0,1-.25,0q-.1,0,0-.18A1.36,1.36,0,0,1,8,29.44q.13-.13.36-.41L9,28.28,9.16,28a.23.23,0,0,0,0-.32.5.5,0,0,1-.2-.49,1.19,1.19,0,0,1,.33-.49,5.74,5.74,0,0,1,1.23-.94,7.72,7.72,0,0,1,.9-.45.91.91,0,0,1,.43,0,1.21,1.21,0,0,1,.46.26,1.08,1.08,0,0,1,.28.37.3.3,0,0,1-.08.36,6.31,6.31,0,0,1-.7.44,6.3,6.3,0,0,0-.7.44.13.13,0,0,0-.07.16.39.39,0,0,0,.1.16s.12,0,.23,0l.65-.24a3.42,3.42,0,0,0,.49-.23.59.59,0,0,1,.39-.1.83.83,0,0,1,.6.24l.31.31a.56.56,0,0,1-.2.84,9.43,9.43,0,0,0-.93.68q-.47.39-.92.79t-.82.79q-.38.39-.6.68t-.23.39.43-.16a8.89,8.89,0,0,0,.85-.57q.46-.34.87-.68l.75-.62Zm-5,.36h0l0,0Zm.2-.13v0l0,0ZM9,29l0,0v.07Zm.13-.32v0l0,0,0,0,0,.06Zm.07.19,0,0v0l0,0,0,0Zm0,2.75h0l0,0Zm.06,0,0,0h0Zm.1,0,0,0h0Zm0-3.27,0,0,0,0H9.34Zm.26.23v0l-.07.06v0l0,0H9.44v0l0,0v0H9.34l0,0v0l0-.07,0,0,0,0,0,0h.07l0,0,0,0Zm0,2.82,0,0,0,0h.07ZM9.67,28h0l0,0h0Zm0,3,0,0h0Zm.07-2.88h0v0Zm0-.32,0,0v.06Zm0,.32v0l0,0Zm0,2.59h0l0,0,0,0v0Zm.1.19H9.8l0,0,0,0Zm0-3.11h0v0Zm.06.23,0,0v0Zm0,.23,0,0v0ZM10,31h0v0Zm.13-.32,0,0v0l0,0v0l.07-.07h0l0,0,0,0v0l0,0v0l-.07.06h0l-.07,0,0,0h0v0l0,0,0,0Zm-.1-.26h0l0,0Zm.23-2.75v0l0,0,0,0Zm0,2.46,0,0h0Zm0,.16,0,0h0Zm0-.36,0,0h0Zm.07-2.23h0v0Zm0,2.56h0v0Zm.07-2.72,0,0v0Zm0,2.4h0v0Zm.07-2.4,0,0h0Zm0,2.62,0,0h0Zm0,.19v0l0,0Zm.16-3.63h0l0,0Zm.16,3h0l0,0h0ZM11,27v0l0,0,0,0Zm0-.55h0l0,0v0l0,0,0,0Zm0,3.3h0l0,0Zm.07-3.11v0l0,0,0,0,0-.06Zm0,2.95,0,0h0Zm.1,0,0,0h0Zm.16-.84,0,0v-.07Zm.29.29,0,0h0Zm0-3.34v0l0,0,0,0Zm0,2.75v0l0,0h0l0,0Zm.07.19,0,0,0,0,0-.06Zm0-2.88h0l0,0h0Zm.52,2,0,0h0Zm.16.06,0,0h0Z"/><path class="cls-1" d="M19.31,29.41q.56-.42.56-.18a.84.84,0,0,1-.26.53q-.52.55-1.16,1.1a10.62,10.62,0,0,1-1.34,1,7.08,7.08,0,0,1-1.47.7,4.38,4.38,0,0,1-1.59.23,2,2,0,0,1-1-.24,1.4,1.4,0,0,1-.64-.71,1.76,1.76,0,0,1,0-1.12,3.84,3.84,0,0,1,.85-1.46,7.17,7.17,0,0,1,.87-.84,14.37,14.37,0,0,1,1.16-.87q.62-.42,1.24-.76a3.88,3.88,0,0,1,1.18-.44,3.18,3.18,0,0,1,.59-.08.71.71,0,0,1,.59.31,1.54,1.54,0,0,1,.29.44,1.46,1.46,0,0,1,.13.63.91.91,0,0,1-.42.76,3.76,3.76,0,0,1-1,.5,5.5,5.5,0,0,1-1.19.26,4.13,4.13,0,0,1-1,0,3.7,3.7,0,0,0-.77.71,6.57,6.57,0,0,0-.54.78,1,1,0,0,0-.15.83q.11.37.8.24a9,9,0,0,0,1-.23,4.37,4.37,0,0,0,.88-.37,9.48,9.48,0,0,0,1-.65Zm-6.24,1.33h0v.06h0Zm.1.81h0v-.06l-.07,0v0a.09.09,0,0,1,0,.06h0Zm.07-1.46h0l0,.06h0Zm0-.32,0,0,0,.06h0ZM13.4,31h0v0h0v0h0l0-.06v0h0v0H13.5v0h0l0,0h0V31h0v0h0v.1h0l0,.1,0-.06,0,0h0v0h0Zm-.07-.65h0v0l0,0Zm.07-.58h0v0Zm0,.45v.07h0v-.07Zm.07,1.49.07,0,0-.07v0l0,0v0h0Zm0-1.65,0,0V30ZM13.59,32l0,0h0l0,0Zm.1-.49,0,0v0Zm.07-1.17h0l0,0h0ZM14,32l0,0v0l0,0Zm.07-2.66,0,0,0,0,0,0Zm.16.07v0l0,0v0Zm0-.26,0,0,0-.06h0Zm.13.07h0l0,0,0,0Zm0,2.95,0,0v0l0,0Zm.1.1h0v0h0Zm.1.06h-.07v0h.07ZM14.8,28l0,0,0,0,0,0Zm.36,4,0,0v0l0,0Zm0-3.56h.07l0,0Zm.1,3.66h0v0h0Zm.1.06h-.07v0h.07Zm.1-4.63a.09.09,0,0,1-.07,0l0,0,0,0,0,0,0,0,0-.07Zm.07.39v0l-.07,0v0l0,0,0,.07Zm.2,4,0,0v0l0,0Zm2.91-4.21a5.32,5.32,0,0,0-.93.24,8.31,8.31,0,0,0-.93.39l-.7.37c-.19.11-.28.17-.28.19a1.76,1.76,0,0,0,.65-.08,8.49,8.49,0,0,0,.88-.29,5.42,5.42,0,0,0,.83-.41A1.23,1.23,0,0,0,18.63,27.73ZM15.91,32.1h-.07v0h.07Zm.26-.36h0v0h0Zm.26-.19h0v0h0Zm.2-2.59v0l-.07,0v0l0,0,0,.06Zm-.1,2.95h0v0h0Zm.16-3.85v0l-.07,0v0l0,0,0,.06Zm0-.49v0l-.07,0v0l0,0,0,.07Zm0-.62,0,0,0,0v0Zm.2.19h0v0Zm.23,1.68v0l-.07,0v0l0,0,0,.06Zm.43.06v0l-.07,0v0l0,0,0,.06ZM18,27.37v0l-.07,0v0l0,0,0,.07Zm.13-.42v0l-.07,0v0l0,0L18,27Zm0,1.55v0l-.07,0v0l0,0,0,.06Zm.29-2a.1.1,0,0,1,0,.06v0Zm.36.71v0l-.07,0v0l0,0,0,.06Zm0,.84v0l-.07,0v0l0,0,0,.06Z"/><path class="cls-1" d="M25.46,29.28q.62-.42.6-.19a1,1,0,0,1-.31.55q-1,.94-2,1.81A6.48,6.48,0,0,1,22,32.62l-.46.15a1.5,1.5,0,0,1-.57,0,.75.75,0,0,1-.46-.21.67.67,0,0,1-.11-.6,1.6,1.6,0,0,1,.23-.47,5,5,0,0,1,.52-.66l.36-.39.47-.52.46-.49.28-.29c.07-.09.09-.13.07-.13s-.05,0-.1.06l-1.47,1q-1,.71-2,1.55c-.17.13-.38.3-.62.52a5.26,5.26,0,0,1-.56.45.67.67,0,0,1-.46.11,1.58,1.58,0,0,1-.52-.11.75.75,0,0,1-.34-.28q-.11-.18.08-.37l1-1,1.49-1.52,1.55-1.57L22,26.69a2.67,2.67,0,0,1,.6-.44.82.82,0,0,1,.41-.1.52.52,0,0,1,.29.13l.26.24q.46.49.16.78a8.55,8.55,0,0,1-1,.83q-.6.44-1,.79c-.11.11-.14.17-.08.18a.39.39,0,0,0,.25-.08l.7-.49,1.06-.75,1-.7a6.07,6.07,0,0,0,.51-.37.58.58,0,0,1,.43-.08.73.73,0,0,1,.34.19,1.93,1.93,0,0,1,.25.29.58.58,0,0,1,.1.18q.23.45-.29.81a21.4,21.4,0,0,0-1.85,1.49q-.9.81-1.75,1.62-.56.55-.42.5a7,7,0,0,0,.75-.44q.65-.45,1.26-.91T25.46,29.28Zm-7.36,2.36h0v0Zm.07,0,0,0v0Zm.1-.07h0v0Zm.29-.26,0,0h0Zm.13-.26,0,0v0Zm.16-.32h0l0,0,0,0,0,0Zm.06.19h-.06v0l0,0Zm.13,0,0,0h0Zm.33-.42v0l0,0,0,0v0l0,.06,0,0v0h0l0,0h0l0,0,.07,0,0,0,.07,0h.07v0l0,0v0h0l0,0h0Zm-.2-.16h0v0Zm.36-.32h0l0,0Zm0,.16v0l0,0,0,0Zm.1-.36,0,0h0Zm0,.32h0v0Zm.1.13,0,0h0Zm0-.42,0,0v0Zm0,.23v0h0Zm.46-.45h0v0Zm.13,0,0,0h0Zm.07-.16h0l0,0Zm.07,0h0v0Zm.33-.81v0l0,0Zm.23-.65,0,0v0h-.07l0,0Zm0,.91,0,0h0Zm.13,2.46,0,0h0Zm0-3,0,0h0l0,0Zm.07.19,0,0v0h-.07l0,0Zm0,2.85h0l0,0Zm.07,0,0,0h0Zm.23-.19,0,0h0Zm.16-4,0,0v0H21.6v0Zm0,3.76,0,0v0Zm.16-.26h0l-.07,0h0Zm0,.16h0l-.07,0h0Zm.07,0,0,0h0Zm.13-.23,0,0v0l0,0v0l0,0h0l0,0v0l0,0,0,0v0l0,0v0h0l0,0v0l0,0,0,0v0l0,0Zm0-3v0l0,0,0,0Zm.29,2.62,0,0h0Zm0-.23h0v0Zm0,.23v0l0,0Zm.1.1,0,0h0Zm0-.13,0,0h0Zm.16-2.59,0,0v0h-.07l0,0Zm.07-.84,0,0v0h-.07v0ZM23,30.16h0l0,0ZM23,30h0v0Zm.07,0,0,0h0Zm0-1.23,0,0v0l0,0v0Zm.43.84.07,0h0Zm.16-.45,0,0v0l0,0,0,0Zm0,.13v0h0l0,0h-.07Zm.16-1,0,0v0l0,0,0,0Zm.46.36h0l0,0Zm.13.06,0,0h0Zm.1-.84.07,0,0,0,.07,0,0,0Zm.39.13,0,0v0l0,0,0,0Zm.42-.78,0,0v0l0,0v0Zm.26.58,0,0v0l0,0,0,0Z"/><path class="cls-1" d="M36,24.59q-1.08,1-2.17,2.07l-2,2q-.95.94-1.63,1.67t-1,1c-.07.06-.09.11-.07.13s.05,0,.1,0,.36-.23.64-.42l.88-.6q.47-.31.9-.62t.69-.47a1.19,1.19,0,0,1,.44-.21c.1,0,.15,0,.16.08a.45.45,0,0,1-.07.26,1.11,1.11,0,0,1-.21.29q-.16.16-.7.63t-1.21,1q-.67.5-1.34.91a3.23,3.23,0,0,1-1.1.47,1.15,1.15,0,0,1-.65-.06.8.8,0,0,1-.46-.55Q27,31.42,28.34,30a1.79,1.79,0,0,0-.47.29,5.19,5.19,0,0,0-.51.42l-.65.65L26,32q-.34.33-.62.55t-.41.19a1,1,0,0,1-.78-.4,1.15,1.15,0,0,1-.13-.88,3.76,3.76,0,0,1,.51-1.21,7.69,7.69,0,0,1,1.19-1.46,12.82,12.82,0,0,1,1.63-1.38,12.32,12.32,0,0,1,1.8-1.05,1.46,1.46,0,0,1,1.06-.11,2.51,2.51,0,0,1,1,.5q.42-.39.92-.89l.95-1,.87-.91.67-.68c.22-.17.38-.25.49-.23a1.18,1.18,0,0,1,.44.19,2,2,0,0,1,.42.37,1,1,0,0,1,.23.45A.51.51,0,0,1,36,24.59ZM25.2,30.71v0h0Zm.26.84q.33-.23,1-.78l1.41-1.12,1.26-1a5.24,5.24,0,0,1,.57-.44q.26-.23.18-.34c-.05-.08-.16-.09-.31,0a3.41,3.41,0,0,0-.85.52q-.56.42-1.19,1t-1.23,1.12q-.59.57-.95,1c-.13.17-.19.27-.18.29S25.29,31.68,25.46,31.55Zm-.23-.84,0,0v-.06Zm.1,0,0,0v-.07Zm.29-.19,0,0h-.07Zm.1-.29h0v0Zm.16-.29,0,0v0l0,0,0,0Zm.1.16,0,0,0,0v0l0,0,0,0Zm.2-.23h0l0,0Zm0-.29v0l0,0Zm0,.29h0l0,0,0,0Zm.07,0,0,0v0l0,0Zm0,0,0,0v0l0,0,0-.06,0,0v0l0,0Zm.1,0,0,0v-.06Zm.1-.49h0v0Zm0,.13v0h0Zm.07-.32v0l0,0Zm0,.32v0l0,0Zm.1-.29,0,0v-.06Zm.06.42,0,0h0Zm.39-.58,0,0v0Zm.13.06,0,0V29Zm.07-.16h0v0Zm.1.06,0,0,0,0Zm.26-.81h0v0Zm.07,3.79,0,0,0,0,0,0Zm.16,0,0,0-.07.06,0,0Zm0-3.5,0,0,0,0Zm.1-.58h.1l0,0Zm.06,4,0,0,0,0,0,0Zm0-3.82,0,0h0l.07,0Zm.52,3.3,0,0,0,0,0,0Zm.13-4.11h0v0Zm.1,3.46,0,0-.07.06,0,0ZM29,27.34l0,0,0,0Zm.2,2.72,0,0,.07,0-.1-.07-.07.1,0,0Zm0,.49.07.06.1-.1-.07,0,0,0,0,0Zm.46.06,0,0-.07,0,0,0Zm.13-.71,0,0-.07.06,0,0Zm0-.55,0,0,0,0-.07,0Zm.1.49,0,0-.07.1,0,0,0,0,0,0,.07-.06,0,0,0-.07,0,0,0,0,.07,0,.06-.1,0,0,.07-.06-.07-.06-.07.06,0,0,0,0,0,0-.1.13,0,0Zm.29-2.72,0,0,.07,0,0,0Zm.13,1.59.07,0,0-.06,0,0Zm.13.26,0,.06,0,0,0-.07Zm.07-.65,0,0,0-.06,0,0Zm.1.62,0,.06,0,0,0-.06Zm.13-.62,0,0,0,0,0,0Zm.1.45,0,0,0,0,0,0Zm.1.45-.07.07,0,0,.07-.06Zm0-1.68,0,0,.07,0,0,0Zm.78.39,0,0,0-.06,0,0ZM31.8,27l0,0,.07,0,0,0ZM32,28l0,0L32,28l0,0Zm.07-.39,0,0,.07,0,0,0Zm0,0,0,0,.07,0,0,0Zm.2-1.13,0,0,.07,0,0,0Zm0,0,0,0,.07,0,0,0Zm0,1.23,0,0,.07-.06-.07,0ZM32.69,26l0,0,.07-.07,0,0Zm.59.62,0,0,0-.07,0,0Zm.16-1.2,0,0,0-.07,0,0,.06-.07-.06,0Zm.16.42,0,0,0,0,.06.06.1-.1,0,0Zm.52-1.23,0,0,.06,0,0,0Zm.1,0h-.1l0,0Zm-.1.74,0,0,.06,0,0,0Zm0,0,.06,0h-.1Zm.69-1.42,0,0,0,0,0,0Zm.33.13,0,0,0-.06,0,0Zm.39.78,0,0,.07,0,0,0Zm.1,0h-.1l0,0Z"/><path class="cls-1" d="M34.06,33.07l0,0a1.18,1.18,0,0,1,.33.76,1.27,1.27,0,0,1-.23.72,3,3,0,0,1-.59.63,4,4,0,0,1-.75.49,2.3,2.3,0,0,1-1.11.26,1.17,1.17,0,0,1-.74-.26.71.71,0,0,1-.23-.58,1.17,1.17,0,0,1,.41-.74l-2.78.29q-1.34.13-3,.19c-.11,0-.17-.08-.18-.25a1.44,1.44,0,0,1,.1-.57,2.37,2.37,0,0,1,.31-.59A.81.81,0,0,1,26,33.1q1.5,0,3.06-.07T32.16,33l1-1,.07-.1a6.39,6.39,0,0,0,.62-.65,12.88,12.88,0,0,1,.95-1c0-.07,0-.09,0-.08a.84.84,0,0,0-.23.08l-3.17,2.23a.54.54,0,0,1-.46.1.87.87,0,0,1-.34-.21,1.61,1.61,0,0,1-.25-.31.71.71,0,0,1-.1-.19.52.52,0,0,1,0-.47,2.11,2.11,0,0,1,.36-.44l1.16-1q.54-.45,1-.92a11,11,0,0,0,.95-1,8,8,0,0,0,.85-1.31A.67.67,0,0,1,35,26.3a1.44,1.44,0,0,1,.6,0,1.62,1.62,0,0,1,.52.21,2.12,2.12,0,0,1,.29.21.37.37,0,0,1-.07.28,3.83,3.83,0,0,1-.28.42,5.26,5.26,0,0,1-.39.47,3.36,3.36,0,0,0-.34.42l-.38.4q-.25.28-.52.55l-.49.5-.28.29q-.13.13-.08.13a.18.18,0,0,0,.11-.06l1.52-1a21.57,21.57,0,0,0,2.14-1.65l.6-.54a6.77,6.77,0,0,1,.6-.5.72.72,0,0,1,.49-.1,1.33,1.33,0,0,1,.54.18,1,1,0,0,1,.36.36.32.32,0,0,1-.08.41q-.2.23-.6.63L38.18,29l-1.68,1.7q-1,1-2.4,2.41Zm-6.6.8h0l.06-.22h0Zm0,0h0v0h0Zm.1,0,0,0v0l0,0Zm.33,0h0v0h0Zm.42,0h0v0h0Zm.26-.32h0v0h0v.06h.07Zm0-.1h0v0h0Zm.13-.1h-.07v0h.07Zm.23.54,0,0v0h-.07v0h0l.06-.23h-.06v0h0v0h0l-.07.23h0v0h.06v0h0v0h0l0,0Zm.1-.51h0v0h0Zm.29.55h0v0h0Zm.07-.36h0v0h0Zm.26-.19v0h0Zm0,.1h0v0h0Zm.43.1h0v0h0Zm0,.29h0v0h0Zm.13,0,.1-.22v0l0,0Zm.07,0h0v0h0Zm1.57.07,0,0,0-.07v0Zm.16,0h0v0l0,0Zm.13,1s.13,0,.26-.11a2.65,2.65,0,0,0,.36-.32,1.11,1.11,0,0,0,.23-.36c0-.12,0-.2-.07-.24s-.09,0-.2.15a3.32,3.32,0,0,0-.33.34,2.85,2.85,0,0,0-.26.36C32.13,34.89,32.13,35,32.19,35Zm0-4.4h0l0,0Zm0,3.29,0,0,0,0,0-.22Zm.26-3.81h0l0,0h.07Zm0,.19,0,0v0Zm.13,0h0v.06Zm.07-.26,0,0h0Zm.07,0,0,0,0,0,0,0Zm0,3.24,0,0,0,0,0,0Zm.1-3.27,0,0h0v0l0,0,0,0v0h.07l0,0Zm.1-.29h0v0Zm0-.19,0,0h0Zm.07,0h0l0,0Zm0,2.85h.07l0,0Zm.1.42v.06l.07-.06v0Zm.29-3.4,0,0v0Zm0,2.79,0,0,0,0,0,0Zm.07.1,0,0v0l-.07,0Zm.1.29h-.1l0,0Zm0-3.17,0,0h0Zm0-.13,0,0h0Zm.07,0h0l0,0Zm0,2.59.1,0,0,0-.07,0Zm0,.68,0,0,0,0,0,0v0Zm.29-.71,0,0-.1.06,0,0Zm-.07-.13,0-.06,0,0Zm.07.23,0,0,0,0,0,0Zm0,.42.07-.07-.07,0,0,.06ZM34,28.8l.07,0h0Zm.1,3,0,0,0,0,0,0Zm0-.55,0,0,0,0,0,0Zm0-2.95h0l0,0h0Zm0,.13,0,0h0Zm.16,2.78h0l0,0,0,0Zm0,.45.07-.07h0l0,0Zm.07.36,0,0,0,0,0,0Zm.26-4.24,0,0v0Zm.13.06h0v0Zm.33,3,0,0v0Zm.26.1,0,0,0,0,0,0Zm.1-.29,0,0,0,0,0,0Zm.13,0-.07,0v0Zm.52-1.39h0l0,0v0Zm.39.49,0,0,0,0,0,0Zm.23-1,0,0,0-.06-.07,0-.07.06,0,0Zm.1.36-.07,0v0l0,0,0,.06Zm1.11-1.52-.1.06,0,0Zm.26.13h0l0,0,0,0Z"/></g></g></svg>';
+	}
+	
 }

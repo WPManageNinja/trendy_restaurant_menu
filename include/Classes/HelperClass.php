@@ -24,31 +24,31 @@ class HelperClass {
 	public static function getNutritionItems() {
 		$items = array(
 			'calories' => array(
-				'label' => 'Calories',
+				'label' => __('Calories', 'tr_menu'),
 				'type' => 'text'
 			),
 			'cholesterol' => array(
-				'label' => 'Cholesterol',
+				'label' => __('Cholesterol', 'tr_menu'),
 				'type' => 'text'
 			),
 			'fiber' => array(
-				'label' => 'Fiber',
+				'label' => __('Fiber', 'tr_menu'),
 				'type' => 'text'
 			),
 			'sodium' => array(
-				'label' => 'Sodium',
+				'label' => __('Sodium','tr_menu'),
 				'type' => 'text'
 			),
 			'carbohydrates' => array(
-				'label' => 'Carbohydrates',
+				'label' => __('Carbohydrates', 'tr_menu'),
 				'type' => 'text'
 			),
 			'fat' => array(
-				'label' => 'Fat',
+				'label' => __('Fat', 'tr_menu'),
 				'type' => 'text'
 			),
 			'protein' => array(
-				'label' => 'Protein',
+				'label' => __('Protein', 'tr_menu'),
 				'type' => 'text'
 			)
 		);
@@ -89,6 +89,9 @@ class HelperClass {
 	public static function getTermsFormatted($args = array()) {
 		$terms = get_terms( $args );
 		$formatted = array();
+		if(is_wp_error($terms)) {
+			return $formatted;
+		}
 		foreach ($terms as $term) {
 			$formatted[$term->slug] = $term->name;
 		}

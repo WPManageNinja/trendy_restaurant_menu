@@ -3,14 +3,13 @@
 class MetaBoxClass {
 
 	public static function addMetaBoxes() {
-
-		add_meta_box( 'ninja_restaurant_menu_main_meta', __( 'Main Item Data', 'restaurant_menu' ),
+		add_meta_box( 'ninja_restaurant_menu_main_meta', __( 'Main Item Data', 'tr_menu' ),
 			array( self::class, 'mainItemMetaBox' ) );
 
-		add_meta_box( 'ninja_restaurant_menu_nutritional_meta', __( 'Nutrition Info', 'restaurant_menu' ),
+		add_meta_box( 'ninja_restaurant_menu_nutritional_meta', __( 'Nutrition Info', 'tr_menu' ),
 			array( self::class, 'nutritionMetaBox' ) );
 
-		add_meta_box( 'ninja_restaurant_menu_ingredients_meta', __( 'Ingredients', 'restaurant_menu' ),
+		add_meta_box( 'ninja_restaurant_menu_ingredients_meta', __( 'Ingredients', 'tr_menu' ),
 			array( self::class, 'ingredientsMetaBox' ) );
 	}
 

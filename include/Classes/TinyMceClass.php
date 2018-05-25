@@ -8,19 +8,19 @@ class TinyMceClass {
 		if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
 			return;
 		}
-
 		// Check if the logged in WordPress User has the Visual Editor enabled
 		// If not, don't register our TinyMCE plugin
 		if ( get_user_option( 'rich_editing' ) !== 'true' ) {
 			return;
 		}
+		
 		add_filter( 'mce_external_plugins', array( self::class, 'addTinymcePlugin' ) );
 		add_filter( 'mce_buttons', array( self::class, 'addToolbarButton' ) );
 	}
 
 	public static function addTinymcePlugin( $plugin_array ) {
 
-		wp_enqueue_style( 'trendy_restaurant_mce_css', RESTAURANT_MENU_PLUGIN_URL . 'assets/tinymce-button.css' );
+		wp_enqueue_style( 'tr_menu_mce_css', RESTAURANT_MENU_PLUGIN_URL . 'assets/tinymce-button.css' );
 
 		wp_enqueue_script( 'moonjs', RESTAURANT_MENU_PLUGIN_URL . 'assets/libs/moon.min.js', array( 'jquery' ),
 			'0.11.0' );
@@ -33,7 +33,6 @@ class TinyMceClass {
 
 	public static function addToolbarButton( $buttons ) {
 		array_push( $buttons, 'trendy_restaurant_mce_class' );
-
 		return $buttons;
 	}
 
@@ -49,7 +48,7 @@ class TinyMceClass {
 				'label' => 'Simple Food Menu'
 			),
 			'grid'           => array(
-				'label' => 'Grid'
+				'label' => 'Grid Styled Menu'
 			)
 		);
 

@@ -1,11 +1,15 @@
 <?php
 
 function ninjaRestaurantMenuRenderMenuItems($attributes) {
+	
+	wp_enqueue_script('tr_menu_js');
+	wp_enqueue_style('tr_menu_styles');
+	
 	extract($attributes);
 	$taxonomies = array(
-		'rl_res_meal_cat'     => ( $meal_type ) ? explode( ',', $meal_type ) : array(),
-		'rl_res_dish_cat'     => ( $dish_type ) ? explode( ',', $dish_type ) : array(),
-		'rl_res_location_cat' => ( $location ) ? explode( ',', $location ) : array()
+		\RestaurantMenu\Classes\PostTypeClass::$mealTypeName     => ( $meal_type ) ? explode( ',', $meal_type ) : array(),
+		\RestaurantMenu\Classes\PostTypeClass::$dishTypeName     => ( $dish_type ) ? explode( ',', $dish_type ) : array(),
+		\RestaurantMenu\Classes\PostTypeClass::$locationTypeName => ( $location ) ? explode( ',', $location ) : array()
 	);
 	
 	$menuItems = ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit, $relation, $attributes );
@@ -45,16 +49,14 @@ function ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relati
 
 	$queryArgs = array(
 		'posts_per_page' => $limit,
-		'post_type' => 'restaurant_menu',
+		'post_type' => \RestaurantMenu\Classes\PostTypeClass::$postTypeName,
 	);
-
-	
 	
 	if(count($taxQuery) > 1) {
 		$queryArgs['tax_query'] = $taxQuery;
 	}
 	
-	$queryArgs = apply_filters('ninja_restaurant_menu_post_query_args', $queryArgs, $attributes);
+	$queryArgs = apply_filters('tr_menu_post_query_args', $queryArgs, $attributes);
 	
 	$items =  get_posts($queryArgs);
 

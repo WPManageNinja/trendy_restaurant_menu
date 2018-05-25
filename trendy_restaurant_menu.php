@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Restaurant Menu 
+Plugin Name: Trendy Restaurant Menu 
 Plugin URI:  https://developer.wordpress.org/restaurant-menu/the-basics/
 Description: Restaurant Menu for a Restaurant business..
 Version:     0.1
 Author:      WPManageNinja
 Author URI:  https://wpmanageninja.com
-Text Domain: restaurant_menu
+Text Domain: tr_menu
 Domain Path: /languages
 License:     GPL2
  
@@ -28,16 +28,17 @@ defined( 'ABSPATH' ) or die();
 
 define( 'RESTAURANT_MENU_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'RESTAURANT_MENU_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
-
+define('RESTAURANT_MENU_PLUGIN_VERSION', '1.0');
 include 'load.php';
 
 class RestaurantMenu {
 
 	public function boot() {
-		$this->publicHooks();
 		$this->commonHooks();
 		if ( is_admin() ) {
 			$this->adminHooks();
+		} else {
+			$this->publicHooks();
 		}
 	}
 
@@ -50,68 +51,54 @@ class RestaurantMenu {
 	 */
 	public function commonHooks() {
 		// register Post type
-		$postTypeClass = new \RestaurantMenu\Classes\PostTypeClass();
-		add_action( 'init', array( $postTypeClass, 'initRestaurantPostType' ) );
-
+		add_action( 'init', array( '\RestaurantMenu\Classes\PostTypeClass', 'initRestaurantPostType' ) );
 		$shortCodeClass = new \RestaurantMenu\Classes\ShortCodeClass();
-		add_shortcode( 'restaurant_menu', array( $shortCodeClass, 'register' ) );
-
+		add_shortcode( 'tr_menu', array( $shortCodeClass, 'register' ) );
 		$menuContentClass = new \RestaurantMenu\Classes\MenuContentClass();
-		add_action( 'wp_ajax_restaurant_menu_public_ajax_actions', array( $menuContentClass, 'handleAjax' ) );
-		add_action( 'wp_ajax_nopriv_restaurant_menu_public_ajax_actions', array( $menuContentClass, 'handleAjax' ) );
+		add_action('init', function () use ($menuContentClass) {
+			if(isset($_GET['tr_get_item']) && $_GET['tr_get_item']) {
+				$menuContentClass->getItemModal();
+				die();
+			}
+		});
+		
 		add_filter( 'the_content', array( $menuContentClass, 'filterSingleMenuContent' ) );
 	}
 	
 	public function adminHooks() {
-		add_action( 'add_meta_boxes_restaurant_menu', array( '\RestaurantMenu\Classes\MetaBoxClass', 'addMetaBoxes' ) );
-		add_action( 'save_post_restaurant_menu', array( '\RestaurantMenu\Classes\MetaBoxClass', 'saveMeta' ) );
+		$postTypeName = \RestaurantMenu\Classes\PostTypeClass::$postTypeName;
+		add_action( 'add_meta_boxes_'.$postTypeName, array( '\RestaurantMenu\Classes\MetaBoxClass', 'addMetaBoxes' ) );
+		add_action( 'save_post_'.$postTypeName, array( '\RestaurantMenu\Classes\MetaBoxClass', 'saveMeta' ) );
 		add_action( 'admin_init', array( '\RestaurantMenu\Classes\TinyMceClass', 'registerButton' ) );
+		
+		add_action('save_post',array('RestaurantMenu\Classes\ShortCodeClass', 'saveFlagOnShortCode'));
+		
+		add_action('admin_menu', array('RestaurantMenu\Classes\SettingsClass', 'addSettingsMenu'));
+	
 	}
 	
 	public function enqueueScripts() {
-		wp_enqueue_style( 'ninja_restaurant_styles', RESTAURANT_MENU_PLUGIN_URL . 'assets/styles.css' );
-		wp_enqueue_script( 'ninja_restaurant_js', RESTAURANT_MENU_PLUGIN_URL . 'assets/app.js',
-			array( 'jquery' ) );
-		wp_localize_script( 'ninja_restaurant_js', 'res_menu',
+		global $post;
+		
+		wp_register_style( 'tr_menu_styles', RESTAURANT_MENU_PLUGIN_URL . 'assets/styles.css', array(), RESTAURANT_MENU_PLUGIN_VERSION );
+		
+		 if(is_singular() && is_a( $post, 'WP_Post' ) && get_post_meta($post->ID, '_has_tr_menu_shortcode', true)) {
+			wp_enqueue_style('tr_menu_styles');
+		} else if(is_singular(array(\RestaurantMenu\Classes\PostTypeClass::$postTypeName))) {
+			wp_enqueue_style('tr_menu_styles');
+		}
+		
+		wp_register_script( 'tr_menu_js', RESTAURANT_MENU_PLUGIN_URL . 'assets/app.js',
+			array( 'jquery' ), RESTAURANT_MENU_PLUGIN_VERSION );
+		wp_localize_script( 'tr_menu_js', 'tr_menu_vars',
 			array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' )
+				'get_item_url' => site_url('?tr_get_item=1')
 			)
 		);
 	}
-
-	// Adding TinyMCE button
-	public function resCustomButton() {
-		$c_screen = get_current_screen();
-		if ( $c_screen->post_type == "page" ) {
-			add_filter( "mce_external_plugins", array( $this, 'myExternalJS' ) );
-			add_filter( "mce_buttons", array( $this, 'ourRestaurantButtons' ) );
-		}
-	}
-
-	public function myExternalJS( $plugin_array ) {
-		$plugin_array['res_ninja_shortcodes'] = RESTAURANT_MENU_PLUGIN_URL . 'assets/tiny_mce_button.js';
-
-		return $plugin_array;
-	}
-
-	public function ourRestaurantButtons( $buttons ) {
-		array_push( $buttons, 'shortCode' );
-
-		return $buttons;
-	}
-	  
-	public function load_custom_admin_style() {
-		wp_register_style( 'custom_wp_admin_css', RESTAURANT_MENU_PLUGIN_URL . 'assets/admin_tiny.css' );
-		wp_enqueue_style( 'custom_wp_admin_css' );
-	}
-	
 }
 
 add_action( 'plugins_loaded', function () {
 	$RestaurantMenus = new RestaurantMenu();
 	$RestaurantMenus->boot();
 } );
-
-		
-
-

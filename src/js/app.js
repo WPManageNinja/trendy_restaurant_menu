@@ -3,37 +3,34 @@ const restaurantMenuApp = {
     addLoader() {
         let res = {
             loader: jQuery('<div/>', {
-                class: 'loader'
+                class: 'tr_loader'
             })
         };
         jQuery('body').append(res.loader);
     },
 
     removeLoader() {
-        jQuery('body').find(".loader").remove();
+        jQuery('body').find(".tr_loader").remove();
     },
 
     fetchItem(itemId) {
         this.addLoader();
 
-        jQuery.get(res_menu.ajaxurl, {
-            action: 'restaurant_menu_public_ajax_actions',
-            route: 'get_item',
+        jQuery.get(tr_menu_vars.get_item_url, {
             item_id: itemId
         })
         .then(function (response) {
             var resModalHolder = jQuery('<div/>', {
                 class: 'res-modal-holder',
-                html:response.data.content
+                html:response
             });
             jQuery('body')
                 .hide()
                 .append(resModalHolder)
-                .fadeIn(300)
-            // console.log(response.data.content);
+                .fadeIn(100)
         })
         .fail(function (error) {
-            console.log(error);
+            alert('Something is wrong when loading the content. Please try again');
         })
         .always(() => {
             this.removeLoader();
@@ -49,7 +46,7 @@ const restaurantMenuApp = {
                 that.fetchItem(itemId);
             }
         });
-        jQuery(document).on("click", '.cls', function() {
+        jQuery(document).on("click", '.tr_close', function() {
             jQuery('.res-modal-holder')
                     .fadeOut('300', function() {
                         jQuery(this).remove();
@@ -57,6 +54,7 @@ const restaurantMenuApp = {
             jQuery('body').css('overflow', 'scroll');
         });
     },
+    
     documentReady() {
         jQuery(document).ready(() => {
             this.initModalClick();
