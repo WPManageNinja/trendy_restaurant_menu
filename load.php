@@ -6,6 +6,6 @@ include 'include/Classes/ShortCodeClass.php';
 include 'include/Classes/MenuContentClass.php';
 include 'include/Classes/MetaBoxClass.php';
 include 'include/Classes/HelperClass.php';
-include 'include/Classes/ResMenuWidgetClass.php';
+include 'include/Classes/WidgetClass.php';
 include 'include/Classes/TinyMceClass.php';
 include 'include/Classes/SettingsClass.php';
