@@ -8,7 +8,7 @@ class HelperClass {
 		$file = sanitize_file_name($file);
 		$file = str_replace('.', DIRECTORY_SEPARATOR, $file);
 		extract($data);
-		$filePath = RESTAURANT_MENU_PLUGIN_DIR_PATH . 'include/templates/' . $file . '.php';
+		$filePath = TRENDY_RESTAURANT_MENU_PLUGIN_DIR_PATH . 'include/templates/' . $file . '.php';
 		if(!file_exists($filePath))  {
 			 return '';
 		}
@@ -52,20 +52,15 @@ class HelperClass {
 				'type' => 'text'
 			)
 		);
-		
 		return apply_filters('ninja_restaurant_menu_nutrition_items', $items);
 	}
 	
-	
 	public static function getCurrency() {
-		return '$';
+		return get_option('_tr_menu_currency_sign', true );
 	}
 	
 	public static function formatPrice($price) {
-		if(!$price || !is_numeric($price)) {
-			return false;
-		}
-		return number_format($price);
+		return $price;
 	}
 	
 	public static function getItemNutrition($postId) {
@@ -82,7 +77,6 @@ class HelperClass {
 				$formattedNutrition[$nutritionItems[$nutritionIndex]['label']] = $nutritionValue;
 			}
 		}
-		
 		return $formattedNutrition;
 	}
 	

@@ -4,8 +4,12 @@ function ninjaRestaurantMenuRenderMenuItems($attributes) {
 	
 	wp_enqueue_script('tr_menu_js');
 	wp_enqueue_style('tr_menu_styles');
-	
 	extract($attributes);
+	if($item_ids) {
+		$attributes['item_ids'] = explode( ',', $item_ids );
+	}
+	
+	
 	$taxonomies = array(
 		\RestaurantMenu\Classes\PostTypeClass::$mealTypeName     => ( $meal_type ) ? explode( ',', $meal_type ) : array(),
 		\RestaurantMenu\Classes\PostTypeClass::$dishTypeName     => ( $dish_type ) ? explode( ',', $dish_type ) : array(),
@@ -26,10 +30,11 @@ function ninjaRestaurantMenuRenderMenuItems($attributes) {
 	return RestaurantMenu\Classes\HelperClass::makeView($view_file, array(
 		'items' => $menuItems,
 		'display' => $display,
-		'currency' => '$',
+		'currency' => \RestaurantMenu\Classes\HelperClass::getCurrency(),
 		'disable_modal' => $disable_modal,
 		'modalClass' => $modalClass,
-		'per_grid' => $per_grid
+		'per_grid' => $per_grid,
+		'excerptLength' => $excerptLength
 	));
 }
 
@@ -47,12 +52,19 @@ function ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relati
 		}
 	}
 
+	if($limit == -1) {
+		$limit = 9999;
+	}
+	
 	$queryArgs = array(
 		'posts_per_page' => $limit,
 		'post_type' => \RestaurantMenu\Classes\PostTypeClass::$postTypeName,
+		'offset' => intval($attributes['offset'])
 	);
 	
-	if(count($taxQuery) > 1) {
+	if($attributes['item_ids']) {
+		$queryArgs['post__in'] = $attributes['item_ids'];
+	} else if(count($taxQuery) > 1) {
 		$queryArgs['tax_query'] = $taxQuery;
 	}
 	
@@ -70,4 +82,24 @@ function ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relati
 	}
 
 	return $items;
+}
+
+function tr_MenuWordExcerpt( $post, $length, $item_type = 'default', $end='....')
+{
+	if($post->post_exceprt) {
+		$string = $post->post_exceprt;
+	} else {
+		$string = $post->post_content;
+	}
+	$string = strip_tags($string);
+	
+	if (strlen($string) > $length) {
+
+		// truncate string
+		$stringCut = substr($string, 0, $length);
+
+		// make sure it ends in a word so assassinate doesn't become ass...
+		$string = substr($stringCut, 0, strrpos($stringCut, ' ')).$end;
+	}
+	return apply_filters('tr_menu_get_item_except', $string, $post, $item_type);
 }

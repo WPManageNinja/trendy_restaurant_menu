@@ -8,20 +8,34 @@ class ShortCodeClass {
 		
 		$defaults = apply_filters('tr_menu_shortcode_defaults', array(
 			'display'   => 'default',
-			'limit'     => - 1,
+			'limit'     => -1,
 			'meal_type' => false,
 			'dish_type' => false,
 			'location'  => false,
 			'disable_modal' => false,
+			'item_ids' => false,
 			'relation'  => 'OR',
-			'per_grid' => 2
+			'per_grid' => 2,
+			'offset' => 0,
+			'excerpt_length' => null
 		));
 		
 		$attributes = shortcode_atts( $defaults, $atts );
 		$attributes['view_file'] = self::getViewNameByDisplay($attributes['display']);
+		$attributes['excerptLength'] = self::getExcerptLength($attributes);
 		$attributes = apply_filters('tr_menu_shortcode_atts', $attributes);
 		
 		return ninjaRestaurantMenuRenderMenuItems($attributes);
+	}
+	
+	public static function getExcerptLength($attributes) {
+		if($attributes['excerpt_length']) {
+			return intval($attributes['excerpt_length']);
+		}
+		if($attributes['display'] == 'grid') {
+			return 90 / $attributes['per_grid'];
+		}
+		return 90;
 	}
 	
 	private static function getViewNameByDisplay($display) {

@@ -17,19 +17,26 @@
         
         <div class="tr_modal_content">
 	        <?php do_action('tr_menu_at_modal_content_start', $post); ?>
-            <?php
-			$categories = wp_get_post_terms( $post->ID, \RestaurantMenu\Classes\PostTypeClass::$mealTypeName );
-			if ( count( $categories ) ):
-				echo '<div class="tr_tax_items">';
-				foreach ( $categories as $category ):
-					echo '<span>' . $category->name . '</span>';
-				endforeach;
-				echo "</div>";
-			endif;
-			?>
-			<?php if ( ! $featuredImage ): ?>
+	        <?php if ( ! $featuredImage ): ?>
                 <h2 class="tr_inner_title"><?php echo $post->post_title; ?></h2>
-			<?php endif; ?>
+	        <?php endif; ?>
+
+            <?php
+	        if($subheader = get_post_meta($post->ID, '_ninja_restaurant_sub_header', true)):
+		        ?>
+                <h4 class="tr_sub_header"><?php echo $subheader; ?></h4>
+	        <?php endif; ?>
+
+	        <?php
+	        $categories = wp_get_post_terms( $post->ID, \RestaurantMenu\Classes\PostTypeClass::$mealTypeName );
+	        if ( count( $categories ) ):
+		        echo '<div class="tr_tax_items">';
+		        foreach ( $categories as $category ):
+			        echo '<span>' . $category->name . '</span>';
+		        endforeach;
+		        echo "</div>";
+	        endif;
+	        ?>
             <div class="tr_item_content">
 				<?php echo do_shortcode($post->post_content); ?>
             </div>

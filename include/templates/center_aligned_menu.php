@@ -11,7 +11,7 @@
                     <span class="res_item_price"> <?php echo $currency; ?><?php echo $item->price; ?></span>
 	            <?php endif; ?>
                 <div class="res_item_content">
-					<?php the_excerpt(); ?>
+	                <?php echo tr_MenuWordExcerpt($item, $excerptLength, 'center_aligned' ); ?>
                 </div>
             </div>
         </div>

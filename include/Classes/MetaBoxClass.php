@@ -14,7 +14,7 @@ class MetaBoxClass {
 	}
 
 	public static function mainItemMetaBox( $post ) {
-		wp_enqueue_style( 'ninja_restaurant_menu_admin_style', RESTAURANT_MENU_PLUGIN_URL . 'assets/admin.css' );
+		wp_enqueue_style( 'ninja_restaurant_menu_admin_style', TRENDY_RESTAURANT_MENU_PLUGIN_URL . 'assets/admin.css' );
 
 		$data = array(
 			'_ninja_restaurant_sub_header'  => get_post_meta( $post->ID, '_ninja_restaurant_sub_header', true ),

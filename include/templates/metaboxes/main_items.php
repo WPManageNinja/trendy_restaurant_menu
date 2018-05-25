@@ -16,7 +16,7 @@
             <label for="_ninja_restaurant_item_price">Price</label>
         </div>
         <div class="rl_meta_field">
-            <input type="number" name="_ninja_restaurant_item_price" id="_ninja_restaurant_item_price"
+            <input type="text" name="_ninja_restaurant_item_price" id="_ninja_restaurant_item_price"
                    value="<?php echo @$_ninja_restaurant_item_price; ?>">
         </div>
     </div>

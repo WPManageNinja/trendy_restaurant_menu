@@ -65,7 +65,7 @@ class ResMenuWidgetClass extends WP_Widget
 		$dishTypeItems = get_terms('rl_res_dish_cat'); 
 		$resLocations = get_terms('rl_res_location_cat'); 
 
-		include RESTAURANT_MENU_PLUGIN_DIR_PATH."include/templates/widgets/res_menu_widget.php";
+		include TRENDY_RESTAURANT_MENU_PLUGIN_DIR_PATH . "include/templates/widgets/res_menu_widget.php";
 		
 	}
 

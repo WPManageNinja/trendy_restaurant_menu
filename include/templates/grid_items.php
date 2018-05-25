@@ -20,11 +20,11 @@
 	            <?php endif; ?>
             </div>
             <div class="res-item-content">
-                <h3 class="res_item_title">
+                <h4 class="res_item_title">
 					<?php echo get_the_title( $item ); ?>
-                </h3>
+                </h4>
                 <div class="res_item_content">
-					<?php the_excerpt(); ?>
+	                <?php echo tr_MenuWordExcerpt($item, $excerptLength, 'grid' ); ?>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@
 					<?php endif; ?>
                 </h3>
                 <div class="res_item_content">
-					<?php the_excerpt(); ?>
+	                <?php echo tr_MenuWordExcerpt($item, $excerptLength, 'simple' ); ?>
                 </div>
             </div>
         </div>

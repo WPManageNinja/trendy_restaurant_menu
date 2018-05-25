@@ -1,0 +1,116 @@
+.trendy_settings_wrapper {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  * {
+    box-sizing: border-box;
+  }
+  .ninja_settings_body {
+    width: 65%;
+    float: left;
+    min-height: 400px;
+    background: white;
+    min-width: 300px;
+    padding: 15px;
+  }
+  .ninja_settings_sidebar {
+    width: 35%;
+    float: left;
+    height: 600px;
+    background: transparent;
+    padding-left: 20px;
+    min-width: 300px;
+    .sidebar_title {
+      margin: 0px;
+      padding: 5px 0px;
+      border-bottom: 1px solid #c3d3da;
+    }
+    .ninja_widget {
+      display: block;
+      background: #fffbfb;
+      img {
+        max-width: 100%;
+      }
+      .widget_title {
+        padding: 10px;
+        border-bottom: 1px solid gray;
+        text-align: center;
+        font-weight: bold;
+        background: #01a8ff;
+        color: white;
+      }
+      .ninja_widget_body {
+        p {
+          padding: 0px 15px;
+        }
+      }
+      .ninja_widget_footer {
+        padding: 10px;
+        text-align: center;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        a {
+          font-weight: bold;
+          border: 1px solid #0073aa;
+          padding: 10px 15px;
+          text-decoration: none;
+          display: inline-block;
+          background: white;
+          text-transform: uppercase;
+          &:hover {
+            background: #0073aa;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  .ninja_form_group {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    label {
+      span {
+        font-size: 16px;
+        padding-right: 20px;
+      }
+      input {
+        min-width: 200px;
+        height: 32px;
+      }
+    }
+  }
+  
+  .ninja_primary_button {
+    background: rgb(28, 184, 65);
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 16px;
+    padding: .5em 1em;
+    border: 1px solid #999;
+    text-decoration: none;
+    display: inline-block;
+    zoom: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    line-height: normal;
+  }
+
+  .ninja_success_message {
+    padding: 15px;
+    background: rgba(119, 193, 32, 0.27);
+    border-radius: 10px;
+    font-weight: bold;
+  }
+}

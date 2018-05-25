@@ -2,5 +2,6 @@
     "/app.js": "/app.js",
     "/styles.css": "/styles.css",
     "/tinymce-button.css": "/tinymce-button.css",
+    "/admin_settings.css": "/admin_settings.css",
     "/tinymce-button.js": "/tinymce-button.js"
 }

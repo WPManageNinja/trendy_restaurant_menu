@@ -20,12 +20,12 @@ class TinyMceClass {
 
 	public static function addTinymcePlugin( $plugin_array ) {
 
-		wp_enqueue_style( 'tr_menu_mce_css', RESTAURANT_MENU_PLUGIN_URL . 'assets/tinymce-button.css' );
+		wp_enqueue_style( 'tr_menu_mce_css', TRENDY_RESTAURANT_MENU_PLUGIN_URL . 'assets/tinymce-button.css' );
 
-		wp_enqueue_script( 'moonjs', RESTAURANT_MENU_PLUGIN_URL . 'assets/libs/moon.min.js', array( 'jquery' ),
+		wp_enqueue_script( 'moonjs', TRENDY_RESTAURANT_MENU_PLUGIN_URL . 'assets/libs/moon.min.js', array( 'jquery' ),
 			'0.11.0' );
 
-		$plugin_array['trendy_restaurant_mce_class'] = RESTAURANT_MENU_PLUGIN_URL . 'assets/tinymce-button.js';
+		$plugin_array['trendy_restaurant_mce_class'] = TRENDY_RESTAURANT_MENU_PLUGIN_URL . 'assets/tinymce-button.js';
 		add_action( 'admin_footer', array( self::class, 'localizeVars' ) );
 
 		return $plugin_array;
@@ -53,17 +53,17 @@ class TinyMceClass {
 		);
 
 		$mealTypes = HelperClass::getTermsFormatted(array(
-			'taxonomy' => 'rl_res_meal_cat',
+			'taxonomy' => PostTypeClass::$mealTypeName,
 			'hide_empty' => false,
 		));
 
 		$dishTypes = HelperClass::getTermsFormatted(array(
-			'taxonomy' => 'rl_res_dish_cat',
+			'taxonomy' => PostTypeClass::$dishTypeName,
 			'hide_empty' => false,
 		));
 
 		$locations = HelperClass::getTermsFormatted(array(
-			'taxonomy' => 'rl_res_location_cat',
+			'taxonomy' => PostTypeClass::$locationTypeName,
 			'hide_empty' => false,
 		));
 
