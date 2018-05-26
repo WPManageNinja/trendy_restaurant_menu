@@ -1,41 +1,34 @@
 <?php
-/*
-Plugin Name: Trendy Restaurant Menu 
-Plugin URI:  https://developer.wordpress.org/restaurant-menu/the-basics/
-Description: Restaurant Menu for a Restaurant business..
-Version:     0.1
-Author:      WPManageNinja
-Author URI:  https://wpmanageninja.com
-Text Domain: tr_menu
-Domain Path: /languages
-License:     GPL2
- 
-Restaurant Menu is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-any later version.
- 
-Restaurant Menu is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
- 
-You should have received a copy of the GNU General Public License
-along with Restaurant Menu. If not, see {License URI}.
-*/
+/**
+ * @link              https://wpmanageninja.com
+ * @since             1.0.0
+ * @package           tr_menu
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Trendy Restaurant Menu
+ * Plugin URI:        https://wpmanageninja.com/products
+ * Description:       The Best Restaurant Menu Plugin in WordPress. This plugin aims to show the restaurant menu in a nice and trendy way.
+ * Version:           1.0.0
+ * Author:            WPManageNinja
+ * Author URI:        https://wpmanageninja.com/
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       tr_menu
+ * Domain Path:       /languages
+ */
 
 defined( 'ABSPATH' ) or die();
 
 define( 'TRENDY_RESTAURANT_MENU_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TRENDY_RESTAURANT_MENU_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
-define( 'TRENDY_RESTAURANT_MENU_PLUGIN_VERSION', '1.0' );
+define( 'TRENDY_RESTAURANT_MENU_PLUGIN_VERSION', '1.0.0' );
 include 'load.php';
 
 register_activation_hook( __FILE__, function () {
 	if ( ! get_option( '_tr_menu_currency_sign', true ) ) {
 		update_option( '_tr_menu_currency_sign', '$' );
 	}
-} );
+});
 
 class RestaurantMenu {
 

@@ -2,16 +2,16 @@
 
 
 class WidgetClass extends \WP_Widget {
-	
+
 	public function __construct() {
 		parent::__construct( 'tr_menu_widget',
-			esc_html__( 'Restaurant Menu', 'tr_menu' ),
+			esc_html__( 'Trendy Restaurant Menu', 'tr_menu' ),
 			array(
 				'description' => esc_html__( 'Restaurant Menu, You can add your website', 'restaurant_menu' )
 			)
 		);
 	}
-	
+
 	public function widget( $args, $instance ) {
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		// before and after widget arguments are defined by themes
@@ -22,16 +22,18 @@ class WidgetClass extends \WP_Widget {
 		// This is where you run the code and display the output
 		$disableModal = ! empty( $instance['_res_disable_modal_widget'] );
 
-		$shortcode = "[tr_menu display='" . $instance['_res_display_widget'] . "' per_grid='1' limit='"
-		             . $instance['_res_limit_widget'] . "' disable_modal='" . $disableModal . "' meal_type='"
-		             . implode( ',', $instance['_res_meal_type_widget'] ) . "' dish_type='" . implode( ',',
-				$instance['_res_dish_type_widget'] ) . "' location='" . implode( ',',
-				$instance['_res_location_widget'] ) . "']";
+		$shortcode = "[tr_menu display='" . $instance['_res_display_widget']
+		             . "' per_grid='1' hide_price=" . $instance['_res_hide_price'] . "
+		             limit='" . $instance['_res_limit_widget'] . "' disable_modal='" . $disableModal
+		             . "'meal_type='" . implode( ',', $instance['_res_meal_type_widget'] )
+		             . "' dish_type='" . implode( ',', $instance['_res_dish_type_widget'] )
+		             . "' location='" . implode( ',', $instance['_res_location_widget'] ) . "']";
+
 		echo do_shortcode( $shortcode );
 
 		echo $args['after_widget'];
 	}
-	
+
 	public function form( $instance ) {
 
 		$title                 = ! empty( $instance['title'] ) ? $instance['title'] : "";
@@ -46,6 +48,7 @@ class WidgetClass extends \WP_Widget {
 		$_res_limit_widget     = ! empty( $instance['_res_limit_widget'] ) ? $instance['_res_limit_widget'] : "5";
 
 		$_res_disable_modal_widget = ! empty( $instance['_res_disable_modal_widget'] );
+		$_res_hide_price           = ! empty( $instance['_res_hide_price'] );
 
 		$displayTypes = HelperClass::getDisplayTypes();
 		$mealTypes    = HelperClass::getTermsFormatted( array(

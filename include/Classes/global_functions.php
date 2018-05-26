@@ -17,7 +17,7 @@ function ninjaRestaurantMenuRenderMenuItems($attributes) {
 	);
 	
 	$menuItems = ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit, $relation, $attributes );
-	
+
 	$modalClass = '';
 	if ( !$disable_modal ) {
 		$modalClass = 'res_item_modal';
@@ -73,14 +73,19 @@ function ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relati
 	$items =  get_posts($queryArgs);
 
 	foreach ($items as $item) {
-		$price = get_post_meta($item->ID, '_ninja_restaurant_item_price', true);
-		if($price) {
-			$item->price = number_format($price);
-		} else {
+		
+		if(isset($attributes['hide_price']) && $attributes['hide_price']) {
 			$item->price = false;
+		} else {
+			$price = get_post_meta($item->ID, '_ninja_restaurant_item_price', true);
+			if($price) {
+				$item->price = number_format($price);
+			} else {
+				$item->price = false;
+			}
 		}
 	}
-
+	
 	return $items;
 }
 

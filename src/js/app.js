@@ -1,5 +1,4 @@
 const restaurantMenuApp = {
-    
     addLoader() {
         let res = {
             loader: jQuery('<div/>', {
@@ -8,11 +7,9 @@ const restaurantMenuApp = {
         };
         jQuery('body').append(res.loader);
     },
-
     removeLoader() {
         jQuery('body').find(".tr_loader").remove();
     },
-
     fetchItem(itemId) {
         this.addLoader();
 
@@ -36,26 +33,34 @@ const restaurantMenuApp = {
             this.removeLoader();
         });
     },
-
+    removeModal() {
+        jQuery('.res-modal-holder')
+            .fadeOut('200', function() {
+                jQuery(this).remove();
+                jQuery('body').removeClass('tr_has_modal');
+                jQuery(document).off('keyup.tr_esc_key');
+            });
+    },
     initModalClick() {
         var that = this;
         jQuery('.res_item_modal').on('click', function (event) {
             event.preventDefault();
-             jQuery('body').css('overflow', 'hidden');
+             jQuery('body').addClass('tr_has_modal');
             let itemId = jQuery(this).attr('data-res_menu_id');
             if (itemId) {
                 that.fetchItem(itemId);
+                // remove modal when esc key is added
+                jQuery(document).on('keyup.tr_esc_key', (function(e) {
+                    if (e.keyCode == 27) { // escape key maps to keycode `27`
+                        that.removeModal();
+                    }
+                }));
             }
         });
         jQuery(document).on("click", '.tr_close', function() {
-            jQuery('.res-modal-holder')
-                    .fadeOut('300', function() {
-                        jQuery(this).remove();
-                    });
-            jQuery('body').css('overflow', 'scroll');
+            that.removeModal();
         });
     },
-    
     documentReady() {
         jQuery(document).ready(() => {
             this.initModalClick();

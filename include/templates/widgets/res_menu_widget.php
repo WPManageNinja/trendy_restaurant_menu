@@ -59,6 +59,13 @@
         <?php esc_attr_e( 'Disable Modal', 'tr_menu' ); ?>
     </label>
 </div>
+<div class="tr_widget_item">
+    <label>
+        <input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( '_res_hide_price' ) ); ?>"  value="1" <?php checked( $_res_hide_price, 1 ); ?> id="<?php echo esc_attr( $this->get_field_id( '_res_hide_price' ) ); ?>">
+		<?php esc_attr_e( 'Hide Price', 'tr_menu' ); ?>
+    </label>
+</div>
+
 
 <style type="text/css">
     .tr_widget_item {

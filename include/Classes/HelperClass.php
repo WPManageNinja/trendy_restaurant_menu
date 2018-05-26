@@ -1,6 +1,4 @@
-<?php 
-
-namespace RestaurantMenu\Classes;
+<?php namespace RestaurantMenu\Classes;
 
 class HelperClass {
 	
@@ -73,7 +71,7 @@ class HelperClass {
 		$formattedNutrition = array();
 		
 		foreach ($nutrition as $nutritionIndex => $nutritionValue) {
-			if(isset($nutritionItems[$nutritionIndex])) {
+			if(isset($nutritionItems[$nutritionIndex]) && $nutritionValue != '') {
 				$formattedNutrition[$nutritionItems[$nutritionIndex]['label']] = $nutritionValue;
 			}
 		}

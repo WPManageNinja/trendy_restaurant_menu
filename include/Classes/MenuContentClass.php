@@ -1,6 +1,4 @@
-<?php
-
-namespace RestaurantMenu\Classes;
+<?php namespace RestaurantMenu\Classes;
 
 class MenuContentClass {
 
@@ -37,19 +35,20 @@ class MenuContentClass {
 		if ( ! is_singular( array( PostTypeClass::$postTypeName ) ) ) {
 			return $content;
 		}
-		
-		$postId = get_the_ID();
-		$price = HelperClass::formatPrice( get_post_meta( $postId, '_ninja_restaurant_item_price', true ) );
+
+		$postId   = get_the_ID();
+		$price    = HelperClass::formatPrice( get_post_meta( $postId, '_ninja_restaurant_item_price', true ) );
 		$currency = HelperClass::getCurrency();
-		$data   = array(
+		$data     = array(
 			'price'       => $price,
-			'post_id' => get_the_ID(),
+			'post_id'     => get_the_ID(),
 			'currency'    => $currency,
 			'nutrition'   => HelperClass::getItemNutrition( $postId ),
 			'ingredients' => get_post_meta( $postId, '_ninja_restaurant_ingredients', true )
 		);
-		
-		$extraContent = HelperClass::makeView('single_menu_content', $data);
-		return $content.$extraContent;
+
+		$extraContent = HelperClass::makeView( 'single_menu_content', $data );
+
+		return $content . $extraContent;
 	}
 }
