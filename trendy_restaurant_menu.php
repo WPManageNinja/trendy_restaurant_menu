@@ -33,17 +33,13 @@ register_activation_hook( __FILE__, function () {
 class RestaurantMenu {
 
 	public function boot() {
+		$this->loadTextDomain();
 		$this->commonHooks();
 		if ( is_admin() ) {
 			$this->adminHooks();
-		} else {
-			$this->publicHooks();
 		}
 	}
 
-	public function publicHooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueScripts' ) );
-	}
 
 	/**
 	 * The hook where we will register all the common actions and filters
@@ -66,6 +62,8 @@ class RestaurantMenu {
 		add_action( 'widgets_init', function () {
 			register_widget( 'RestaurantMenu\Classes\WidgetClass' );
 		} );
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueScripts' ) );
 	}
 
 	public function adminHooks() {
@@ -102,6 +100,10 @@ class RestaurantMenu {
 				'get_item_url' => site_url( '?tr_get_item=1' )
 			)
 		);
+	}
+	
+	public function loadTextDomain() {
+		load_plugin_textdomain( 'tr_menu', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 }
 

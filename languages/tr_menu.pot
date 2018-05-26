@@ -1,0 +1,349 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Trendy Restaurant Menu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-26 08:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: include/Classes/HelperClass.php:25
+msgid "Calories"
+msgstr ""
+
+#: include/Classes/HelperClass.php:29
+msgid "Cholesterol"
+msgstr ""
+
+#: include/Classes/HelperClass.php:33
+msgid "Fiber"
+msgstr ""
+
+#: include/Classes/HelperClass.php:37
+msgid "Sodium"
+msgstr ""
+
+#: include/Classes/HelperClass.php:41
+msgid "Carbohydrates"
+msgstr ""
+
+#: include/Classes/HelperClass.php:45
+msgid "Fat"
+msgstr ""
+
+#: include/Classes/HelperClass.php:49
+msgid "Protein"
+msgstr ""
+
+#: include/Classes/MetaBoxClass.php:6
+msgid "Main Item Data"
+msgstr ""
+
+#: include/Classes/MetaBoxClass.php:9
+msgid "Nutrition Info"
+msgstr ""
+
+#: include/Classes/MetaBoxClass.php:12 include/templates/modal.php:66
+#: include/templates/single_menu_content.php:22
+#: include/templates/metaboxes/ingredients.php:3
+msgid "Ingredients"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:20
+msgctxt "post type general name"
+msgid "Menu Items"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:21
+msgctxt "post type singular name"
+msgid "Menu Item"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:22
+msgctxt "admin menu"
+msgid "Restaurant Menu"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:23
+msgctxt "add new on admin bar"
+msgid "Restaurant Menu"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:24
+msgctxt "menu"
+msgid "Add New"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:25
+msgid "Add New Menu"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:26
+msgid "New Menu"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:27
+msgid "Edit Menu"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:28
+msgid "View Menu"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:29
+msgid "All Restaurant Menus"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:30
+msgid "Search Restaurant Menus"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:31
+msgid "Parent Restaurant Menu:"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:32
+msgid "No restaurant menus found."
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:33
+msgid "No restaurant menus found in Trash."
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:37
+msgid "Description."
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:58
+msgctxt "taxonomy general name"
+msgid "Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:59
+msgctxt "taxonomy singular name"
+msgid "Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:60
+msgid "Search Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:61
+msgid "All Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:62
+msgid "Parent Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:63
+msgid "Parent Meal Type:"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:64
+msgid "Edit Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:65
+msgid "Update Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:66
+msgid "Add New Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:67
+msgid "New Meal Type Name"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:68
+msgid "Meal Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:84
+msgctxt "taxonomy general name"
+msgid "Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:85
+msgctxt "taxonomy singular name"
+msgid "Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:86
+msgid "Search Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:87
+msgid "All Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:88
+msgid "Parent Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:89
+msgid "Parent Dish Type:"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:90
+msgid "Edit Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:91
+msgid "Update Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:92
+msgid "Add New Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:93
+msgid "New Dish Type Name"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:94
+msgid "Dish Type"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:110
+msgctxt "taxonomy general name"
+msgid "Locations"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:111
+msgctxt "taxonomy singular name"
+msgid "Location"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:112
+msgid "Search Location"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:113
+msgid "All Locations"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:114
+msgid "Parent Location"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:115
+msgid "Parent Location:"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:116
+msgid "Edit Location"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:117
+msgid "Update Location"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:118
+msgid "Add New Location"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:119
+msgid "New Location Name"
+msgstr ""
+
+#: include/Classes/PostTypeClass.php:120
+msgid "Location"
+msgstr ""
+
+#: include/Classes/SettingsClass.php:6
+msgid "Trendy Restaurant Settings"
+msgstr ""
+
+#: include/Classes/SettingsClass.php:7
+msgid "Settings"
+msgstr ""
+
+#: include/Classes/SettingsClass.php:30
+msgid "Settings successfully saved"
+msgstr ""
+
+#. Name of the plugin
+#: include/Classes/WidgetClass.php:8
+msgid "Trendy Restaurant Menu"
+msgstr ""
+
+#: include/Classes/WidgetClass.php:10
+msgid "Restaurant Menu, You can add your website"
+msgstr ""
+
+#: include/templates/modal.php:48 include/templates/single_menu_content.php:5
+msgid "Nutrition"
+msgstr ""
+
+#: include/templates/settings/settings.php:7
+msgid "Restaurant Currency Sign"
+msgstr ""
+
+#: include/templates/settings/settings.php:12
+msgid "Save Settings"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:2
+msgid "Title:"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:7
+msgid "Display:"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:16
+msgid "Meal Types:"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:17
+#: include/templates/widgets/res_menu_widget.php:28
+msgid "Don't select any if you want to show all types"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:27
+#: include/templates/widgets/res_menu_widget.php:38
+msgid "Dish Types:"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:39
+msgid "Don't select any if you want to show all locations"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:51
+msgid "Number of posts to show:"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:59
+msgid "Disable Modal"
+msgstr ""
+
+#: include/templates/widgets/res_menu_widget.php:65
+msgid "Hide Price"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"The Best Restaurant Menu Plugin in WordPress. This plugin aims to show the "
+"restaurant menu in a nice and trendy way."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://wpmanageninja.com/products"
+msgstr ""
+
+#. Author of the plugin
+msgid "WPManageNinja"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpmanageninja.com/"
+msgstr ""

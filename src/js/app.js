@@ -37,7 +37,7 @@ const restaurantMenuApp = {
         jQuery('.res-modal-holder')
             .fadeOut('200', function() {
                 jQuery(this).remove();
-                jQuery('body').removeClass('tr_has_modal');
+                jQuery('html,body').removeClass('tr_has_modal');
                 jQuery(document).off('keyup.tr_esc_key');
             });
     },
@@ -45,7 +45,7 @@ const restaurantMenuApp = {
         var that = this;
         jQuery('.res_item_modal').on('click', function (event) {
             event.preventDefault();
-             jQuery('body').addClass('tr_has_modal');
+            jQuery('html,body').addClass('tr_has_modal');
             let itemId = jQuery(this).attr('data-res_menu_id');
             if (itemId) {
                 that.fetchItem(itemId);

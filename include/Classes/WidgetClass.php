@@ -7,7 +7,7 @@ class WidgetClass extends \WP_Widget {
 		parent::__construct( 'tr_menu_widget',
 			esc_html__( 'Trendy Restaurant Menu', 'tr_menu' ),
 			array(
-				'description' => esc_html__( 'Restaurant Menu, You can add your website', 'restaurant_menu' )
+				'description' => esc_html__( 'Restaurant Menu, You can add your website', 'tr_menu' )
 			)
 		);
 	}

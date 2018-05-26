@@ -1,10 +1,10 @@
 <div class="tr_widget_item"> 
-	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"> <?php esc_attr_e( 'Title:', 'restaurant_menu' ); ?> </label> 
+	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"> <?php esc_attr_e( 'Title:', 'tr_menu' ); ?> </label> 
 	<input type="text" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo $title ; ?>" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
 </div>
 
 <div class="tr_widget_item">
-<label for="<?php echo esc_attr( $this->get_field_id( '_res_display_widget' ) ); ?>"> <?php esc_attr_e( 'Display:', 'restaurant_menu' ); ?> </label>
+<label for="<?php echo esc_attr( $this->get_field_id( '_res_display_widget' ) ); ?>"> <?php esc_attr_e( 'Display:', 'tr_menu' ); ?> </label>
 	<select name="<?php echo esc_attr( $this->get_field_name( '_res_display_widget' ) ); ?>" class="widefat" id="<?php echo esc_attr( $this->get_field_id( '_res_display_widget' ) ); ?>">
 		<?php foreach ($displayTypes as $display_key => $display): ?>
             <option value="<?php echo $display_key; ?>" <?php selected($_res_display_widget,$display_key); ?>> <?php echo $display['label']; ?> </option>
@@ -48,7 +48,7 @@
 
 <div class="tr_widget_item">
 	<label>
-        <?php esc_attr_e( 'Number of posts to show:', 'restaurant_menu' ); ?> 
+        <?php esc_attr_e( 'Number of posts to show:', 'tr_menu' ); ?> 
     </label> 
 	<input type="number" name="<?php echo esc_attr( $this->get_field_name( '_res_limit_widget' ) ); ?>" class="tiny-text" step="1" min="1" size="3" value="<?php echo esc_attr( $_res_limit_widget ); ?>">
 </div>
