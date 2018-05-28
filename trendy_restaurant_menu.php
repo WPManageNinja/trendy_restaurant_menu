@@ -16,7 +16,6 @@
  * Text Domain:       tr_menu
  * Domain Path:       /languages
  */
-
 defined( 'ABSPATH' ) or die();
 
 define( 'TRENDY_RESTAURANT_MENU_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -30,8 +29,8 @@ register_activation_hook( __FILE__, function () {
 	}
 });
 
-class RestaurantMenu {
-
+class TrendyRestaurantMenuMainClass {
+	
 	public function boot() {
 		$this->loadTextDomain();
 		$this->commonHooks();
@@ -39,17 +38,16 @@ class RestaurantMenu {
 			$this->adminHooks();
 		}
 	}
-
-
+	
 	/**
 	 * The hook where we will register all the common actions and filters
 	 */
 	public function commonHooks() {
 		// register Post type
-		add_action( 'init', array( '\RestaurantMenu\Classes\PostTypeClass', 'initRestaurantPostType' ) );
-		$shortCodeClass = new \RestaurantMenu\Classes\ShortCodeClass();
+		add_action( 'init', array( '\TrendyRestaurantMenu\Classes\PostTypeClass', 'initRestaurantPostType' ) );
+		$shortCodeClass = new \TrendyRestaurantMenu\Classes\ShortCodeClass();
 		add_shortcode( 'tr_menu', array( $shortCodeClass, 'register' ) );
-		$menuContentClass = new \RestaurantMenu\Classes\MenuContentClass();
+		$menuContentClass = new \TrendyRestaurantMenu\Classes\MenuContentClass();
 		add_action( 'init', function () use ( $menuContentClass ) {
 			if ( isset( $_GET['tr_get_item'] ) && $_GET['tr_get_item'] ) {
 				$menuContentClass->getItemModal();
@@ -60,26 +58,26 @@ class RestaurantMenu {
 		add_filter( 'the_content', array( $menuContentClass, 'filterSingleMenuContent' ) );
 
 		add_action( 'widgets_init', function () {
-			register_widget( 'RestaurantMenu\Classes\WidgetClass' );
+			register_widget( 'TrendyRestaurantMenu\Classes\WidgetClass' );
 		} );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueScripts' ) );
 	}
 
 	public function adminHooks() {
-		$postTypeName = \RestaurantMenu\Classes\PostTypeClass::$postTypeName;
+		$postTypeName = \TrendyRestaurantMenu\Classes\PostTypeClass::$postTypeName;
 		add_action( 'add_meta_boxes_' . $postTypeName,
-			array( '\RestaurantMenu\Classes\MetaBoxClass', 'addMetaBoxes' ) );
-		add_action( 'save_post_' . $postTypeName, array( '\RestaurantMenu\Classes\MetaBoxClass', 'saveMeta' ) );
+			array( '\TrendyRestaurantMenu\Classes\MetaBoxClass', 'addMetaBoxes' ) );
+		add_action( 'save_post_' . $postTypeName, array( '\TrendyRestaurantMenu\Classes\MetaBoxClass', 'saveMeta' ) );
 		add_action( 'current_screen', function ( $current_screen ) use ( $postTypeName ) {
 			if ( $current_screen->post_type != $postTypeName ) {
-				\RestaurantMenu\Classes\TinyMceClass::registerButton();
+				\TrendyRestaurantMenu\Classes\TinyMceClass::registerButton();
 			}
 		} );
 		
-		add_action( 'save_post', array( 'RestaurantMenu\Classes\ShortCodeClass', 'saveFlagOnShortCode' ) );
-		add_action( 'admin_menu', array( 'RestaurantMenu\Classes\SettingsClass', 'addSettingsMenu' ) );
-		add_action( 'wp_ajax_tr_menu_save_settings', array( 'RestaurantMenu\Classes\SettingsClass', 'saveSettings' ) );
+		add_action( 'save_post', array( 'TrendyRestaurantMenu\Classes\ShortCodeClass', 'saveFlagOnShortCode' ) );
+		add_action( 'admin_menu', array( 'TrendyRestaurantMenu\Classes\SettingsClass', 'addSettingsMenu' ) );
+		add_action( 'wp_ajax_tr_menu_save_settings', array( 'TrendyRestaurantMenu\Classes\SettingsClass', 'saveSettings' ) );
 	}
 
 	public function enqueueScripts() {
@@ -89,7 +87,7 @@ class RestaurantMenu {
 
 		if ( is_singular() && is_a( $post, 'WP_Post' ) && get_post_meta( $post->ID, '_has_tr_menu_shortcode', true ) ) {
 			wp_enqueue_style( 'tr_menu_styles' );
-		} else if ( is_singular( array( \RestaurantMenu\Classes\PostTypeClass::$postTypeName ) ) ) {
+		} else if ( is_singular( array( \TrendyRestaurantMenu\Classes\PostTypeClass::$postTypeName ) ) ) {
 			wp_enqueue_style( 'tr_menu_styles' );
 		}
 
@@ -108,6 +106,6 @@ class RestaurantMenu {
 }
 
 add_action( 'plugins_loaded', function () {
-	$RestaurantMenus = new RestaurantMenu();
+	$RestaurantMenus = new TrendyRestaurantMenuMainClass();
 	$RestaurantMenus->boot();
 } );

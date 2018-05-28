@@ -1,6 +1,6 @@
 <?php
 
-function ninjaRestaurantMenuRenderMenuItems($attributes) {
+function trendyRestaurantMenuRenderMenuItems($attributes) {
 	
 	wp_enqueue_script('tr_menu_js');
 	wp_enqueue_style('tr_menu_styles');
@@ -11,12 +11,12 @@ function ninjaRestaurantMenuRenderMenuItems($attributes) {
 	
 	
 	$taxonomies = array(
-		\RestaurantMenu\Classes\PostTypeClass::$mealTypeName     => ( $meal_type ) ? explode( ',', $meal_type ) : array(),
-		\RestaurantMenu\Classes\PostTypeClass::$dishTypeName     => ( $dish_type ) ? explode( ',', $dish_type ) : array(),
-		\RestaurantMenu\Classes\PostTypeClass::$locationTypeName => ( $location ) ? explode( ',', $location ) : array()
+		\TrendyRestaurantMenu\Classes\PostTypeClass::$mealTypeName     => ( $meal_type ) ? explode( ',', $meal_type ) : array(),
+		\TrendyRestaurantMenu\Classes\PostTypeClass::$dishTypeName     => ( $dish_type ) ? explode( ',', $dish_type ) : array(),
+		\TrendyRestaurantMenu\Classes\PostTypeClass::$locationTypeName => ( $location ) ? explode( ',', $location ) : array()
 	);
 	
-	$menuItems = ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit, $relation, $attributes );
+	$menuItems = trendyRestaurantMenuGetMenuItems( $taxonomies, $limit, $relation, $attributes );
 
 	$modalClass = '';
 	if ( !$disable_modal ) {
@@ -27,10 +27,10 @@ function ninjaRestaurantMenuRenderMenuItems($attributes) {
 		$display = 'default';
 	}
 	
-	return RestaurantMenu\Classes\HelperClass::makeView($view_file, array(
+	return TrendyRestaurantMenu\Classes\HelperClass::makeView($view_file, array(
 		'items' => $menuItems,
 		'display' => $display,
-		'currency' => \RestaurantMenu\Classes\HelperClass::getCurrency(),
+		'currency' => \TrendyRestaurantMenu\Classes\HelperClass::getCurrency(),
 		'disable_modal' => $disable_modal,
 		'modalClass' => $modalClass,
 		'per_grid' => $per_grid,
@@ -38,7 +38,7 @@ function ninjaRestaurantMenuRenderMenuItems($attributes) {
 	));
 }
 
-function ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relation = 'AND', $attributes ) {
+function trendyRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relation = 'AND', $attributes ) {
 	$taxQuery = array(
 		'relation' => $tax_relation,
 	);
@@ -58,7 +58,7 @@ function ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relati
 	
 	$queryArgs = array(
 		'posts_per_page' => $limit,
-		'post_type' => \RestaurantMenu\Classes\PostTypeClass::$postTypeName,
+		'post_type' => \TrendyRestaurantMenu\Classes\PostTypeClass::$postTypeName,
 		'offset' => intval($attributes['offset'])
 	);
 	
@@ -89,7 +89,7 @@ function ninjaRestaurantMenuGetMenuItems( $taxonomies, $limit = - 1, $tax_relati
 	return $items;
 }
 
-function tr_MenuWordExcerpt( $post, $length, $item_type = 'default', $end='....')
+function trendyRestaurantMenuWordExcerpt( $post, $length, $item_type = 'default', $end='....')
 {
 	if($post->post_exceprt) {
 		$string = $post->post_exceprt;

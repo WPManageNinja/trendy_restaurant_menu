@@ -1,4 +1,4 @@
-<?php namespace RestaurantMenu\Classes;
+<?php namespace TrendyRestaurantMenu\Classes;
 
 class SettingsClass {
 

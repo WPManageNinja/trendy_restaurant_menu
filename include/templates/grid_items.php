@@ -22,7 +22,7 @@
 					<?php echo get_the_title( $item ); ?>
                 </h4>
                 <div class="res_item_content">
-	                <?php echo tr_MenuWordExcerpt($item, $excerptLength, 'grid' ); ?>
+	                <?php echo trendyRestaurantMenuWordExcerpt($item, $excerptLength, 'grid' ); ?>
                 </div>
             </div>
         </div>

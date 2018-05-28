@@ -27,7 +27,7 @@
         </div>
 	<?php endif; ?>
 	<?php
-	$categories = wp_get_post_terms( $post_id, \RestaurantMenu\Classes\PostTypeClass::$mealTypeName );
+	$categories = wp_get_post_terms( $post_id, \TrendyRestaurantMenu\Classes\PostTypeClass::$mealTypeName );
 	if ( count( $categories ) ):
 		echo '<div class="tr_tax_items">';
 		foreach ( $categories as $category ):

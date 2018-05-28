@@ -1,4 +1,4 @@
-<?php namespace RestaurantMenu\Classes;
+<?php namespace TrendyRestaurantMenu\Classes;
 
 class ShortCodeClass {
 
@@ -24,7 +24,7 @@ class ShortCodeClass {
 		$attributes['excerptLength'] = self::getExcerptLength( $attributes );
 		$attributes                  = apply_filters( 'tr_menu_shortcode_atts', $attributes );
 
-		return ninjaRestaurantMenuRenderMenuItems( $attributes );
+		return trendyRestaurantMenuRenderMenuItems( $attributes );
 	}
 
 	public static function getExcerptLength( $attributes ) {
