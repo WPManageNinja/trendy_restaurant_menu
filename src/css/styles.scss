@@ -40,8 +40,16 @@
       padding: 0px;
       margin: 0px;
       float: left;
+      a {
+        text-decoration: none;
+        box-shadow: none;
+      }
       img {
         max-width: 100%;
+        box-shadow: none;
+        :hover {
+          box-shadow: none;
+        }
       }
     }
     .res_item_title {
@@ -55,6 +63,11 @@
       margin: 0px;
       width: 70%;
       float: left;
+      &.res-item-no-image {
+        float: none;
+        width: 100%;
+        padding-left: 0px;
+      }
     }
   }
 }
@@ -90,14 +103,23 @@
   .res_gid_4 {
     width: 25%;
     float: left;
+    &:nth-child(4n + 1) {
+      clear: both;
+    }
   }
   .res_gid_3 {
     width: 33%;
     float: left;
+    &:nth-child(3n + 1) {
+      clear: both;
+    }
   }
   .res_gid_2 {
     width: 50%;
     float: left;
+    &:nth-child(2n + 1) {
+      clear: both;
+    }
   }
   .res_gid_1 {
     width: 100%;
@@ -197,6 +219,12 @@
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       position: relative;
+      .tr_header_section {
+        h3 {
+          color: white;
+          font-weight: bold;
+        }
+      }
       @media screen and ( max-width: 767px ) {
         height: 267px;
       }

@@ -3,12 +3,15 @@
 		<?php setup_postdata( $item ); ?>
         <div class="res-item res_item_id_<?php echo $item->ID; ?>  <?php echo $modalClass; ?>"
              data-res_menu_id="<?php echo $item->ID; ?>">
+            <?php $featuredImage = get_the_post_thumbnail( $item, 'medium' ); ?>
+            <?php if($featuredImage): ?>
             <div class="res_featured_image">
-                <a href="<?php get_the_permalink( $item ); ?>">
-					<?php echo get_the_post_thumbnail( $item, 'medium' ); ?>
+                <a href="<?php echo get_the_permalink( $item ); ?>">
+					<?php echo $featuredImage; ?>
                 </a>
             </div>
-            <div class="res-item-content">
+            <?php endif; ?>
+            <div class="res-item-content <?php echo (!$featuredImage) ? 'res-item-no-image' : '';  ?>">
                 <h3 class="res_item_title">
 					<?php echo get_the_title( $item ); ?>
 					<?php if ( $item->price ): ?>

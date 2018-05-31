@@ -15,6 +15,8 @@ The Most Elegant Restaurant Menu Plugin in WordPress. Multiple Templates, Popup 
 
 Trendy Restaurant Menu is an easy to use plugin for WordPress to show your menu items elegant way. Build unlimited food menu items for your restaurant, categorize them by dish type or meal type OR build your own custom categories. Show off those delicious food images and various data like nutrition information, spicy level, recipe etc for each food menu item for your restaurant menu. You can also build multiple menus for different locations of your restaurants and manage them from the same place.
 
+[View Interactive Demo](http://demo.wpmanageninja.com/restaurant-menu) | [Get Free Support](https://wpmanageninja.com/)
+
 == Some Major Features ==
 * Unlimited  menu items
 * Add Restaurant Locations, Dish Type and Meal Type
@@ -40,6 +42,10 @@ Get dedicated support from our awesome happiness managers and developers and Yes
 We are currently working on extensive documentation. Please check back in few days.
 
 So, give this plugin a try and check the awesome powerful features of Restaurant Menu, Let us know what you loved and what else features you would like to see in this plugin.
+
+
+== Usage ==
+To show one of your tables in a post, on a page, or in a text widget, just embed the Shortcode [tr_menu display='default'] into the post/page/text widget, where 'default' is the display type of the style. You can build the shortcode from tinymce of Wordpress)
 
 == Installation ==
 
@@ -83,15 +89,16 @@ Yes, We have dedicated widget for the menu items and you can add one or more wid
 
 == Screenshots ==
 1. Different styled Menu Items
-2. Grid Styled Menu Items
-3. Centered styles menu items
-4. Default Styled Menu Items
-5. Menu on Widget
-6. Shortcode Builder
+2. Menu Modal
+3. Default Styled Menu Items
+4. Grid Styled Menu Items
+5. Simple Styled Menu Items
+6. Grid Styled Menu Items 2
+7. Shortcode Builder
 
 == Changelog ==
 
-= 1.0.0 ( Date: May 26, 2018 ) = 
+= 1.0.0 ( Date: May 31, 2018 ) = 
 Initial Release
 
 == Upgrade Notice ==

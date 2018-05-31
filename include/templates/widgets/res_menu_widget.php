@@ -35,7 +35,7 @@
 </div>
 
 <div class="tr_widget_item">
-    <h4> <?php esc_attr_e( 'Dish Types:', 'tr_menu' ); ?> </h4>
+    <h4> <?php esc_attr_e( 'Locations:', 'tr_menu' ); ?> </h4>
     <p><small><?php esc_attr_e( 'Don\'t select any if you want to show all locations', 'tr_menu' );?></small></p>
 	<?php foreach ($locations as $locationKey => $locationItem ) : ?>
         <label>
